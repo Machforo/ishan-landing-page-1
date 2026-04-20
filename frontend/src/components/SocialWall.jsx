@@ -14,7 +14,7 @@ export default function SocialWall() {
                 <Instagram size={14} /> Follow us
               </span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-                GD Goenka <span className="italic text-[#1e3a8a]">Social Wall</span>
+                Ishan <span className="italic text-[#1e3a8a]">Social Wall</span>
               </h2>
             </div>
             <a

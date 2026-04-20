@@ -33,7 +33,7 @@ export default function Placements() {
             </span>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 leading-tight">
               Placement Support at <br />
-              <span className="italic text-[#1e3a8a]">GD Goenka University</span>
+              <span className="italic text-[#1e3a8a]">Ishan Educational Institutions</span>
             </h2>
             <p className="mt-5 text-gray-600 leading-relaxed text-[15px]">
               Our dedicated career advisory and placement team provides comprehensive career

@@ -14,7 +14,7 @@ export default function Happenings() {
                 <span className="w-8 h-px bg-[#1e3a8a]" /> News & Events
               </span>
               <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 leading-tight">
-                Happenings @ <span className="italic text-[#1e3a8a]">GD Goenka</span>
+                Happenings @ <span className="italic text-[#1e3a8a]">Ishan</span>
               </h2>
             </div>
             <a
