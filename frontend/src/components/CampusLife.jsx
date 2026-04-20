@@ -6,7 +6,7 @@ import Counter from "./Counter";
 
 export default function CampusLife() {
   return (
-    <section className="py-16 md:py-24 bg-[#f5f7fb] relative overflow-hidden">
+    <section id="campus" className="py-16 md:py-24 bg-[#f5f7fb] relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#1e3a8a]/5 rounded-full blur-3xl" />
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative">
         <Reveal>

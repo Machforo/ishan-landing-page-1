@@ -9,7 +9,7 @@ export default function Programmes() {
   const [headRef, headIn] = useReveal();
 
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+    <section id="programmes" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="absolute top-20 -left-20 w-72 h-72 bg-[#1e3a8a]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 -right-20 w-72 h-72 bg-amber-300/30 rounded-full blur-3xl" />
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative">

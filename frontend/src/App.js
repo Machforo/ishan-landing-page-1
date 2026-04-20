@@ -11,6 +11,7 @@ import Placements from "./components/Placements";
 import About from "./components/About";
 import Happenings from "./components/Happenings";
 import SocialWall from "./components/SocialWall";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import FloatingWidgets from "./components/FloatingWidgets";
 import "./App.css";
@@ -30,6 +31,7 @@ function App() {
       <Placements />
       <Happenings />
       <SocialWall />
+      <Contact />
       <Footer />
       <FloatingWidgets />
     </div>

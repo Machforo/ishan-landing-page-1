@@ -8,7 +8,7 @@ export default function About() {
   const [img, setImg] = useState(0);
 
   return (
-    <section className="py-16 md:py-24 bg-[#0a1232] text-white relative overflow-hidden">
+    <section id="about" className="py-16 md:py-24 bg-[#0a1232] text-white relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#1e3a8a]/40 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-500/10 rounded-full blur-3xl" />
       <div

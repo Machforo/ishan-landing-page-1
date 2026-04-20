@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function Happenings() {
   return (
-    <section className="py-16 md:py-24 bg-white relative">
+    <section id="news" className="py-16 md:py-24 bg-white relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <Reveal>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-5">

@@ -2,6 +2,81 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, Search, ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { navMenu, ISHAN_LOGO } from "../mock";
 
+// Maps each menu item to a homepage section id (anchor scroll)
+const SECTION_MAP = {
+  // About
+  "About Ishan": "about",
+  "Chairman's Message": "about",
+  "Mission, Vision & Values": "about",
+  "Awards & Rankings": "about",
+  "Approvals & Affiliations": "about",
+  "Group Timeline (Since 1994)": "about",
+  // Colleges
+  "Ishan Institute of Law": "colleges",
+  "Ishan Institute of Management & Technology": "colleges",
+  "Ishan Institute of Pharmacy": "colleges",
+  "Ishan Ayurvedic Medical Sciences": "colleges",
+  "Ishan Institute of Education": "colleges",
+  "All Colleges — Gateway": "colleges",
+  // Admissions
+  "Admissions Overview": "programmes",
+  "All UG + PG Programs": "programmes",
+  Scholarships: "programmes",
+  "International / NRI Admissions": "programmes",
+  "Fee Structure": "programmes",
+  "How to Apply": "programmes",
+  // Placements
+  "Placements Overview": "placements",
+  "Our Recruiters": "placements",
+  "Alumni Network": "placements",
+  "Careers @ Ishan": "placements",
+  "Training & Development": "placements",
+  // Research
+  "Research Hub": "research",
+  "Ishan Management Journal": "research",
+  "Ishan Law Review": "research",
+  "Pharmaceutical Research": "research",
+  "Funded Projects": "research",
+  Publications: "research",
+  // Campus
+  "Campus Life": "campus",
+  "Hostel & Accommodation": "campus",
+  "Sports & Fitness": "campus",
+  Libraries: "campus",
+  "Events Calendar": "news",
+  "Social Media Hub": "social",
+  // News
+  "News & Updates": "news",
+  Gallery: "news",
+  // Contact
+  "Contact Us": "contact",
+  "Mandatory Disclosures": "contact",
+  "Anti-Ragging Zone": "contact",
+  "Grievance Redressal": "contact",
+  "Downloads Hub": "contact",
+};
+
+const MENU_DEFAULTS = {
+  About: "about",
+  Colleges: "colleges",
+  Admissions: "programmes",
+  Placements: "placements",
+  Research: "research",
+  Campus: "campus",
+  News: "news",
+  Contact: "contact",
+};
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const y = el.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
 const menuIcons = {
   About: "🏛",
   Colleges: "🎓",
@@ -10,7 +85,7 @@ const menuIcons = {
   Research: "🔬",
   Campus: "✨",
   News: "📰",
-  Contact: "☎️",
+  Contact: "☎",
 };
 
 export default function Navbar() {
@@ -25,6 +100,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const handleNav = (e, target) => {
+    e.preventDefault();
+    setActiveMenu(null);
+    setOpen(false);
+    scrollTo(target);
+  };
+
   return (
     <>
       <header
@@ -32,49 +114,62 @@ export default function Navbar() {
           scrolled ? "bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]" : "bg-white"
         }`}
       >
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-8 flex items-center justify-between h-[84px]">
-          <a href="/" className="flex items-center gap-3 group">
+        <div className="max-w-[1400px] mx-auto px-5 lg:px-8 flex items-center justify-between h-[88px] gap-4">
+          <a
+            href="#top"
+            onClick={(e) => handleNav(e, "top")}
+            className="flex items-center gap-3 group shrink-0"
+          >
             <img
               src={ISHAN_LOGO}
               alt="Ishan Educational Institutions"
-              className="h-14 w-auto object-contain group-hover:scale-105 transition-transform"
+              className="h-14 lg:h-16 w-auto object-contain group-hover:scale-105 transition-transform"
             />
-            <div className="hidden sm:flex flex-col leading-tight border-l border-gray-200 pl-3">
-              <span className="text-[#1e3a8a] text-[15px] font-bold tracking-wide font-serif">
+            <div className="hidden 2xl:flex flex-col leading-[1.1] border-l-2 border-gray-200 pl-3">
+              <span className="text-[#1e3a8a] text-[20px] font-bold tracking-wider font-serif">
                 ISHAN
               </span>
-              <span className="text-[#333] text-[9px] tracking-[0.25em] font-semibold">
+              <span className="text-gray-700 text-[9px] tracking-[0.2em] font-semibold mt-0.5">
                 EDUCATIONAL INSTITUTIONS
               </span>
-              <span className="text-amber-500 text-[9px] italic mt-0.5">Since 1994</span>
+              <span className="text-amber-500 text-[10px] italic font-semibold mt-0.5">
+                Since 1994
+              </span>
             </div>
           </a>
 
-          <nav className="hidden xl:flex items-center" onMouseLeave={() => setActiveMenu(null)}>
+          <nav
+            className="hidden xl:flex items-center"
+            onMouseLeave={() => setActiveMenu(null)}
+          >
             {navMenu.map((m) => (
               <div
                 key={m.title}
                 className="relative"
                 onMouseEnter={() => setActiveMenu(m.title)}
               >
-                <button
-                  className={`flex items-center gap-1 px-3 py-7 text-[12.5px] font-semibold transition-colors uppercase tracking-wide relative ${
-                    activeMenu === m.title ? "text-[#1e3a8a]" : "text-gray-800 hover:text-[#1e3a8a]"
+                <a
+                  href={`#${MENU_DEFAULTS[m.title] || "top"}`}
+                  onClick={(e) => handleNav(e, MENU_DEFAULTS[m.title] || "top")}
+                  className={`flex items-center gap-1 px-2.5 py-7 text-[12px] font-semibold transition-colors uppercase tracking-wide relative ${
+                    activeMenu === m.title
+                      ? "text-[#1e3a8a]"
+                      : "text-gray-800 hover:text-[#1e3a8a]"
                   }`}
                 >
                   {m.title}
                   <ChevronDown
-                    size={12}
+                    size={11}
                     className={`opacity-60 transition-transform duration-300 ${
                       activeMenu === m.title ? "rotate-180" : ""
                     }`}
                   />
                   <span
-                    className={`absolute bottom-5 left-3 right-3 h-[2px] bg-[#1e3a8a] origin-left transition-transform duration-300 ${
+                    className={`absolute bottom-5 left-2.5 right-2.5 h-[2px] bg-[#1e3a8a] origin-left transition-transform duration-300 ${
                       activeMenu === m.title ? "scale-x-100" : "scale-x-0"
                     }`}
                   />
-                </button>
+                </a>
               </div>
             ))}
           </nav>
@@ -95,7 +190,8 @@ export default function Navbar() {
               <Phone size={16} />
             </a>
             <a
-              href="#"
+              href="#contact"
+              onClick={(e) => handleNav(e, "contact")}
               className="hidden md:inline-flex relative items-center bg-[#1e3a8a] text-white text-[12.5px] font-bold px-6 py-3 rounded-sm shadow-md hover:shadow-xl overflow-hidden group tracking-wider transition"
             >
               <span className="relative z-10">APPLY NOW</span>
@@ -153,7 +249,8 @@ export default function Navbar() {
                     Discover the legacy of Ishan — 30+ years, 5 colleges, 50,000+ alumni.
                   </p>
                   <a
-                    href="#"
+                    href={`#${MENU_DEFAULTS[activeMenu] || "top"}`}
+                    onClick={(e) => handleNav(e, MENU_DEFAULTS[activeMenu] || "top")}
                     className="inline-flex items-center gap-2 mt-5 text-xs font-semibold bg-amber-500 text-[#0a1232] px-4 py-2 rounded-sm hover:bg-amber-400 transition relative z-10"
                   >
                     Know More <ArrowRight size={12} />
@@ -165,7 +262,8 @@ export default function Navbar() {
                     ?.items.map((it, i) => (
                       <a
                         key={it}
-                        href="#"
+                        href={`#${SECTION_MAP[it] || "top"}`}
+                        onClick={(e) => handleNav(e, SECTION_MAP[it] || "top")}
                         className="group flex items-center gap-2 py-2.5 border-b border-gray-100 text-[13px] text-gray-700 hover:text-[#1e3a8a] transition-all"
                         style={{ animation: `itemFade 0.35s ease-out ${i * 0.03}s both` }}
                       >
@@ -191,7 +289,10 @@ export default function Navbar() {
       </header>
 
       {open && (
-        <div className="fixed inset-0 z-[60] bg-black/60 xl:hidden animate-in fade-in" onClick={() => setOpen(false)}>
+        <div
+          className="fixed inset-0 z-[60] bg-black/60 xl:hidden animate-in fade-in"
+          onClick={() => setOpen(false)}
+        >
           <aside
             className="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-white shadow-2xl overflow-y-auto animate-in slide-in-from-right duration-300"
             onClick={(e) => e.stopPropagation()}
@@ -214,14 +315,23 @@ export default function Navbar() {
                   </summary>
                   <div className="pl-6 pb-2 bg-gray-50">
                     {m.items.map((it) => (
-                      <a key={it} href="#" className="block py-2 text-[13px] text-gray-600 hover:text-[#1e3a8a]">
+                      <a
+                        key={it}
+                        href={`#${SECTION_MAP[it] || "top"}`}
+                        onClick={(e) => handleNav(e, SECTION_MAP[it] || "top")}
+                        className="block py-2 text-[13px] text-gray-600 hover:text-[#1e3a8a]"
+                      >
                         {it}
                       </a>
                     ))}
                   </div>
                 </details>
               ))}
-              <a href="#" className="block my-4 mx-3 text-center bg-[#1e3a8a] text-white font-semibold py-3 rounded-sm">
+              <a
+                href="#contact"
+                onClick={(e) => handleNav(e, "contact")}
+                className="block my-4 mx-3 text-center bg-[#1e3a8a] text-white font-semibold py-3 rounded-sm"
+              >
                 APPLY NOW
               </a>
             </nav>

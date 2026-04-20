@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { heroSlides } from "../mock";
 import { ChevronLeft, ChevronRight, Play, Search } from "lucide-react";
+import NewsFlash from "./NewsFlash";
 
 export default function Hero() {
   const [idx, setIdx] = useState(0);
@@ -14,8 +15,19 @@ export default function Hero() {
 
   const slide = heroSlides[idx];
 
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative w-full h-[600px] md:h-[720px] overflow-hidden bg-[#0a1232]">
+    <section
+      id="top"
+      className="relative w-full h-[620px] md:h-[740px] overflow-hidden bg-[#0a1232]"
+    >
       {heroSlides.map((s, i) => (
         <div
           key={s.id}
@@ -28,7 +40,7 @@ export default function Hero() {
             alt={s.tag}
             className={`w-full h-full object-cover ${i === idx ? "animate-kenburns" : ""}`}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1232]/90 via-[#0a1232]/60 to-[#0a1232]/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1232]/90 via-[#0a1232]/60 to-[#0a1232]/30" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a1232]/70 via-transparent to-transparent" />
         </div>
       ))}
@@ -39,73 +51,82 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 lg:px-10 flex flex-col justify-center pb-28 text-white">
-        <div key={slide.id} className="max-w-2xl">
-          <div className="inline-block px-4 py-1.5 bg-[#1e3a8a] text-[11px] font-bold tracking-[0.25em] mb-5 slide-enter-1">
-            {slide.tag}
-          </div>
-          <h1 className="font-serif text-3xl md:text-5xl lg:text-[56px] font-bold leading-[1.08] mb-5 slide-enter-2">
-            {slide.title}
-          </h1>
-          <p className="text-base md:text-lg text-gray-200 mb-6 max-w-xl slide-enter-3">
-            {slide.subtitle}
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-center">
+          <div key={slide.id} className="max-w-2xl">
+            <div className="inline-block px-4 py-1.5 bg-[#1e3a8a] text-[11px] font-bold tracking-[0.25em] mb-5 slide-enter-1">
+              {slide.tag}
+            </div>
+            <h1 className="font-serif text-3xl md:text-5xl lg:text-[52px] font-bold leading-[1.08] mb-5 slide-enter-2">
+              {slide.title}
+            </h1>
+            <p className="text-base md:text-lg text-gray-200 mb-6 max-w-xl slide-enter-3">
+              {slide.subtitle}
+            </p>
 
-          {slide.specialisations && (
-            <div className="mb-6 slide-enter-4">
-              <h4 className="text-amber-400 font-semibold text-sm mb-2 tracking-wide">
-                Specialisations
-              </h4>
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm max-w-lg">
-                {slide.specialisations.map((s) => (
-                  <span key={s} className="text-gray-100">• {s}</span>
+            {slide.specialisations && (
+              <div className="mb-6 slide-enter-4">
+                <h4 className="text-amber-400 font-semibold text-sm mb-2 tracking-wide">
+                  Specialisations
+                </h4>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm max-w-lg">
+                  {slide.specialisations.map((s) => (
+                    <span key={s} className="text-gray-100">
+                      • {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {slide.programs && (
+              <div className="flex flex-wrap gap-4 mb-6 slide-enter-4">
+                {slide.programs.map((p) => (
+                  <div
+                    key={p}
+                    className="text-lg md:text-xl font-serif font-semibold text-amber-400 border-b-2 border-amber-400/40 pb-1"
+                  >
+                    {p}
+                  </div>
                 ))}
               </div>
-            </div>
-          )}
+            )}
 
-          {slide.programs && (
-            <div className="flex flex-wrap gap-4 mb-6 slide-enter-4">
-              {slide.programs.map((p) => (
-                <div
-                  key={p}
-                  className="text-lg md:text-xl font-serif font-semibold text-amber-400 border-b-2 border-amber-400/40 pb-1"
-                >
-                  {p}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {slide.stats && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 slide-enter-4">
-              {slide.stats.map((st) => (
-                <div key={st.label}>
-                  <div className="text-3xl md:text-4xl font-serif font-bold text-amber-400">
-                    {st.num}
+            {slide.stats && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 slide-enter-4">
+                {slide.stats.map((st) => (
+                  <div key={st.label}>
+                    <div className="text-3xl md:text-4xl font-serif font-bold text-amber-400">
+                      {st.num}
+                    </div>
+                    <div className="text-xs text-gray-200 leading-tight">{st.label}</div>
                   </div>
-                  <div className="text-xs text-gray-200 leading-tight">{st.label}</div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
 
-          <div className="flex items-center gap-4 slide-enter-5">
-            <a
-              href="#"
-              className="relative inline-flex items-center gap-2 bg-amber-500 text-[#0a1232] font-bold px-7 py-3.5 text-sm uppercase tracking-wider shadow-xl overflow-hidden group"
-            >
-              <span className="relative z-10">Apply Now</span>
-              <span className="absolute inset-0 bg-amber-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
-            </a>
-            <a
-              href="#"
-              className="group inline-flex items-center gap-3 text-white font-semibold text-sm"
-            >
-              <span className="w-11 h-11 rounded-full border border-white/60 flex items-center justify-center group-hover:bg-amber-400 group-hover:border-amber-400 group-hover:text-[#0a1232] transition">
-                <Play size={14} fill="currentColor" />
-              </span>
-              Virtual Tour
-            </a>
+            <div className="flex items-center gap-4 slide-enter-5">
+              <button
+                onClick={() => scrollToId("contact")}
+                className="relative inline-flex items-center gap-2 bg-amber-500 text-[#0a1232] font-bold px-7 py-3.5 text-sm uppercase tracking-wider shadow-xl overflow-hidden group"
+              >
+                <span className="relative z-10">Apply Now</span>
+                <span className="absolute inset-0 bg-amber-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+              </button>
+              <button
+                onClick={() => scrollToId("campus")}
+                className="group inline-flex items-center gap-3 text-white font-semibold text-sm"
+              >
+                <span className="w-11 h-11 rounded-full border border-white/60 flex items-center justify-center group-hover:bg-amber-400 group-hover:border-amber-400 group-hover:text-[#0a1232] transition">
+                  <Play size={14} fill="currentColor" />
+                </span>
+                Virtual Tour
+              </button>
+            </div>
+          </div>
+
+          {/* News flash panel on right */}
+          <div className="hidden lg:block slide-enter-5">
+            <NewsFlash />
           </div>
         </div>
       </div>
@@ -127,7 +148,10 @@ export default function Hero() {
               {["Undergraduate", "Postgraduate", "Diploma", "Doctoral"].map((l) => (
                 <button
                   key={l}
-                  onClick={() => setLevel(l)}
+                  onClick={() => {
+                    setLevel(l);
+                    scrollToId("programmes");
+                  }}
                   className={`hover:text-[#1e3a8a] transition ${
                     level === l ? "text-[#1e3a8a]" : ""
                   }`}
@@ -136,10 +160,16 @@ export default function Hero() {
                 </button>
               ))}
             </div>
-            <button className="bg-[#1e3a8a] hover:bg-[#152a5e] text-white font-bold px-8 py-4 text-sm uppercase tracking-wider transition">
+            <button
+              onClick={() => scrollToId("contact")}
+              className="bg-[#1e3a8a] hover:bg-[#152a5e] text-white font-bold px-8 py-4 text-sm uppercase tracking-wider transition"
+            >
               Apply Now
             </button>
-            <button className="bg-amber-500 hover:bg-amber-400 text-[#0a1232] font-bold px-8 py-4 text-sm uppercase tracking-wider transition">
+            <button
+              onClick={() => scrollToId("programmes")}
+              className="bg-amber-500 hover:bg-amber-400 text-[#0a1232] font-bold px-8 py-4 text-sm uppercase tracking-wider transition"
+            >
               View All
             </button>
           </div>

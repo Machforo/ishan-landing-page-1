@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function Colleges() {
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+    <section id="colleges" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{
         backgroundImage: "radial-gradient(circle, #1e3a8a 1px, transparent 1px)",
         backgroundSize: "24px 24px",

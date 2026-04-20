@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function Research() {
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+    <section id="research" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="absolute -left-6 top-20 hidden lg:block">
         <div className="w-1 h-64 bg-gradient-to-b from-[#1e3a8a] to-transparent" />
       </div>

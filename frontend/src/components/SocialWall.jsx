@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function SocialWall() {
   return (
-    <section className="py-16 md:py-20 bg-[#f5f7fb]">
+    <section id="social" className="py-16 md:py-20 bg-[#f5f7fb]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <Reveal>
           <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
