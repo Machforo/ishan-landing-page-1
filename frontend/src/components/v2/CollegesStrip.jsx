@@ -76,7 +76,7 @@ export default function CollegesStrip() {
                 <img
                   src={c.image}
                   alt={c.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1200ms]"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a1232]/90 via-[#0a1232]/20 to-transparent" />
                 <div className="absolute top-3 left-3 bg-amber-500 text-[#0a1232] text-[10px] font-black tracking-widest px-2.5 py-1">

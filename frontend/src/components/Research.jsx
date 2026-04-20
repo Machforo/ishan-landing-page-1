@@ -59,7 +59,7 @@ export default function Research() {
                   <img
                     src={c.image}
                     alt={c.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms]"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
