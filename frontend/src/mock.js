@@ -6,6 +6,14 @@ export const ISHAN_LOGO =
 export const heroSlides = [
   {
     id: 1,
+    image: "https://images.pexels.com/photos/16767715/pexels-photo-16767715.jpeg?w=1920",
+    tag: "ISHAN INSTITUTE OF MANAGEMENT & TECHNOLOGY",
+    title: "ADMISSIONS OPEN 2026-27",
+    subtitle: "AICTE approved PGDM, MBA, BBA & BCom programs",
+    programs: ["PGDM", "MBA", "BBA", "B.COM"],
+  },
+  {
+    id: 2,
     image: "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=1920",
     tag: "ISHAN INSTITUTE OF LAW",
     title: "Shaping India's Next Generation of Legal Minds",
@@ -20,14 +28,6 @@ export const heroSlides = [
       "Environmental Law",
       "Taxation",
     ],
-  },
-  {
-    id: 2,
-    image: "https://images.pexels.com/photos/16767715/pexels-photo-16767715.jpeg?w=1920",
-    tag: "ISHAN INSTITUTE OF MANAGEMENT & TECHNOLOGY",
-    title: "ADMISSIONS OPEN 2026-27",
-    subtitle: "AICTE approved PGDM, MBA, BBA & BCom programs",
-    programs: ["PGDM", "MBA", "BBA", "B.COM"],
   },
   {
     id: 3,
