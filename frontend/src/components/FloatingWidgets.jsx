@@ -20,7 +20,7 @@ export default function FloatingWidgets() {
       {/* Side "Admission Enquiry" tab */}
       <button
         onClick={() => setEnquiry(true)}
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-amber-400 text-[#8B0000] text-xs font-bold py-3 px-3 rotate-180 writing-vertical shadow-lg hover:bg-amber-500 transition"
+        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-amber-400 text-[#1e3a8a] text-xs font-bold py-3 px-3 rotate-180 writing-vertical shadow-lg hover:bg-amber-500 transition"
         style={{ writingMode: "vertical-rl" }}
       >
         ADMISSION ENQUIRY
@@ -29,7 +29,7 @@ export default function FloatingWidgets() {
       {/* Chat button */}
       <button
         onClick={() => setChat(!chat)}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#8B0000] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#1e3a8a] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition pulse-ring"
         aria-label="Chat"
       >
         {chat ? <X size={22} /> : <MessageCircle size={22} />}
@@ -38,32 +38,32 @@ export default function FloatingWidgets() {
       {/* Chat window */}
       {chat && (
         <div className="fixed bottom-24 right-6 z-40 w-[320px] bg-white shadow-2xl border border-gray-200 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="bg-[#8B0000] text-white p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-amber-300 flex items-center justify-center text-[#8B0000] font-bold">
-              N
+          <div className="bg-[#1e3a8a] text-white p-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-amber-400 flex items-center justify-center text-[#1e3a8a] font-bold">
+              I
             </div>
             <div>
-              <div className="font-semibold">Niaa</div>
+              <div className="font-semibold">Ishan Assistant</div>
               <div className="text-[11px] opacity-80">Admission Assistant • Online</div>
             </div>
           </div>
           <div className="p-4 h-64 bg-gray-50 text-sm space-y-3 overflow-y-auto">
             <div className="bg-white border border-gray-200 p-3 max-w-[85%]">
-              👋 Hi! I'm Niaa, your admission assistant. How can I help you today?
+              Hi! I'm your Ishan admissions assistant. How can I help you today?
             </div>
-            <div className="bg-[#8B0000] text-white p-3 max-w-[85%] ml-auto text-xs">
-              Tell me about MBA programmes
+            <div className="bg-[#1e3a8a] text-white p-3 max-w-[85%] ml-auto text-xs">
+              Tell me about BA LL.B programme
             </div>
             <div className="bg-white border border-gray-200 p-3 max-w-[85%]">
-              We offer MBA with specializations in Finance, Analytics, Marketing, HR and more. Would you like to apply?
+              BCI-approved 5-year integrated BA LL.B (Hons.) at Ishan Institute of Law. Would you like to apply?
             </div>
           </div>
           <div className="p-3 border-t flex gap-2">
             <input
-              className="flex-1 border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:border-[#8B0000]"
+              className="flex-1 border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:border-[#1e3a8a]"
               placeholder="Type a message..."
             />
-            <button className="bg-[#8B0000] text-white px-3 hover:bg-[#6d0000] transition">
+            <button className="bg-[#1e3a8a] text-white px-3 hover:bg-[#152a5e] transition">
               <Send size={16} />
             </button>
           </div>
@@ -77,7 +77,7 @@ export default function FloatingWidgets() {
             className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-[#8B0000] text-white p-6 flex items-center justify-between">
+            <div className="bg-[#1e3a8a] text-white p-6 flex items-center justify-between">
               <div>
                 <div className="text-xs tracking-widest uppercase opacity-80">Start Your Journey</div>
                 <h3 className="font-serif text-xl font-bold mt-1">Admission Enquiry 2026-27</h3>
@@ -92,7 +92,7 @@ export default function FloatingWidgets() {
                   <label className="text-xs font-semibold text-gray-600">Full Name *</label>
                   <input
                     required
-                    className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#8B0000]"
+                    className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a]"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
@@ -101,7 +101,7 @@ export default function FloatingWidgets() {
                     <input
                       required
                       type="tel"
-                      className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#8B0000]"
+                      className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a]"
                     />
                   </div>
                   <div>
@@ -109,13 +109,13 @@ export default function FloatingWidgets() {
                     <input
                       required
                       type="email"
-                      className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#8B0000]"
+                      className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a]"
                     />
                   </div>
                 </div>
                 <div>
                   <label className="text-xs font-semibold text-gray-600">Programme of Interest</label>
-                  <select className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#8B0000] bg-white">
+                  <select className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] bg-white">
                     <option>Undergraduate</option>
                     <option>Postgraduate</option>
                     <option>Diploma</option>
@@ -126,12 +126,12 @@ export default function FloatingWidgets() {
                   <label className="text-xs font-semibold text-gray-600">Message</label>
                   <textarea
                     rows="3"
-                    className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#8B0000]"
+                    className="w-full mt-1 border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a]"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#8B0000] hover:bg-[#6d0000] text-white py-3 text-sm font-semibold uppercase tracking-wider transition"
+                  className="w-full bg-[#1e3a8a] hover:bg-[#152a5e] text-white py-3 text-sm font-semibold uppercase tracking-wider transition"
                 >
                   Submit Enquiry
                 </button>

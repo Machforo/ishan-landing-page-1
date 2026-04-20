@@ -1,65 +1,74 @@
 import React, { useState, useEffect } from "react";
 import { heroSlides } from "../mock";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Search } from "lucide-react";
 
 export default function Hero() {
   const [idx, setIdx] = useState(0);
+  const [query, setQuery] = useState("");
+  const [level, setLevel] = useState("Undergraduate");
 
   useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % heroSlides.length), 6000);
+    const t = setInterval(() => setIdx((i) => (i + 1) % heroSlides.length), 6500);
     return () => clearInterval(t);
   }, []);
 
   const slide = heroSlides[idx];
 
   return (
-    <section className="relative w-full h-[560px] md:h-[640px] overflow-hidden bg-black">
+    <section className="relative w-full h-[600px] md:h-[720px] overflow-hidden bg-[#0a1232]">
       {heroSlides.map((s, i) => (
         <div
           key={s.id}
           className={`absolute inset-0 transition-opacity duration-1000 ${
-            i === idx ? "opacity-100" : "opacity-0"
+            i === idx ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
-          <img src={s.image} alt={s.tag} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
+          <img
+            src={s.image}
+            alt={s.tag}
+            className={`w-full h-full object-cover ${i === idx ? "animate-kenburns" : ""}`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1232]/90 via-[#0a1232]/60 to-[#0a1232]/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1232]/70 via-transparent to-transparent" />
         </div>
       ))}
 
-      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 lg:px-10 flex flex-col justify-center text-white">
-        <div className="max-w-2xl">
-          <div className="inline-block px-4 py-1.5 bg-[#8B0000] text-[11px] font-bold tracking-[0.2em] mb-5 animate-in fade-in slide-in-from-left-4 duration-700">
+      <div className="absolute top-8 left-6 lg:left-10 z-20 flex items-center gap-2 text-white/80 text-[11px] tracking-[0.35em] uppercase">
+        <span className="w-8 h-px bg-amber-400" />
+        Admissions 2026-27
+      </div>
+
+      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 lg:px-10 flex flex-col justify-center pb-28 text-white">
+        <div key={slide.id} className="max-w-2xl">
+          <div className="inline-block px-4 py-1.5 bg-[#1e3a8a] text-[11px] font-bold tracking-[0.25em] mb-5 slide-enter-1">
             {slide.tag}
           </div>
-          <h1
-            key={slide.id}
-            className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 animate-in fade-in slide-in-from-left-6 duration-700"
-          >
+          <h1 className="font-serif text-3xl md:text-5xl lg:text-[56px] font-bold leading-[1.08] mb-5 slide-enter-2">
             {slide.title}
           </h1>
-          <p className="text-base md:text-lg text-gray-200 mb-5 max-w-xl">{slide.subtitle}</p>
+          <p className="text-base md:text-lg text-gray-200 mb-6 max-w-xl slide-enter-3">
+            {slide.subtitle}
+          </p>
 
           {slide.specialisations && (
-            <div className="mb-6">
-              <h4 className="text-amber-300 font-semibold text-sm mb-2 tracking-wide">
+            <div className="mb-6 slide-enter-4">
+              <h4 className="text-amber-400 font-semibold text-sm mb-2 tracking-wide">
                 Specialisations
               </h4>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm max-w-lg">
                 {slide.specialisations.map((s) => (
-                  <span key={s} className="text-gray-100">
-                    • {s}
-                  </span>
+                  <span key={s} className="text-gray-100">• {s}</span>
                 ))}
               </div>
             </div>
           )}
 
           {slide.programs && (
-            <div className="flex flex-wrap gap-4 mb-6">
+            <div className="flex flex-wrap gap-4 mb-6 slide-enter-4">
               {slide.programs.map((p) => (
                 <div
                   key={p}
-                  className="text-lg md:text-xl font-serif font-semibold text-amber-300 border-b-2 border-amber-300/40 pb-1"
+                  className="text-lg md:text-xl font-serif font-semibold text-amber-400 border-b-2 border-amber-400/40 pb-1"
                 >
                   {p}
                 </div>
@@ -68,52 +77,113 @@ export default function Hero() {
           )}
 
           {slide.stats && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 slide-enter-4">
               {slide.stats.map((st) => (
                 <div key={st.label}>
-                  <div className="text-3xl md:text-4xl font-serif font-bold text-amber-300">{st.num}</div>
+                  <div className="text-3xl md:text-4xl font-serif font-bold text-amber-400">
+                    {st.num}
+                  </div>
                   <div className="text-xs text-gray-200 leading-tight">{st.label}</div>
                 </div>
               ))}
             </div>
           )}
 
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 bg-white text-[#8B0000] font-bold px-7 py-3 text-sm uppercase tracking-wider hover:bg-amber-200 transition-all shadow-lg"
-          >
-            Apply Now
-          </a>
+          <div className="flex items-center gap-4 slide-enter-5">
+            <a
+              href="#"
+              className="relative inline-flex items-center gap-2 bg-amber-500 text-[#0a1232] font-bold px-7 py-3.5 text-sm uppercase tracking-wider shadow-xl overflow-hidden group"
+            >
+              <span className="relative z-10">Apply Now</span>
+              <span className="absolute inset-0 bg-amber-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+            </a>
+            <a
+              href="#"
+              className="group inline-flex items-center gap-3 text-white font-semibold text-sm"
+            >
+              <span className="w-11 h-11 rounded-full border border-white/60 flex items-center justify-center group-hover:bg-amber-400 group-hover:border-amber-400 group-hover:text-[#0a1232] transition">
+                <Play size={14} fill="currentColor" />
+              </span>
+              Virtual Tour
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Find Programmes bar */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#0a1232] via-[#0a1232]/95 to-transparent pt-10 pb-5">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+          <div className="flex items-center gap-3 bg-white shadow-2xl">
+            <div className="pl-5 pr-2 py-4">
+              <Search className="text-[#1e3a8a]" size={20} />
+            </div>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Find Programmes"
+              className="flex-1 py-4 text-base text-gray-800 outline-none placeholder:text-gray-400"
+            />
+            <div className="hidden md:flex items-center gap-5 px-4 text-[13px] font-semibold text-gray-700">
+              {["Undergraduate", "Postgraduate", "Diploma", "Doctoral"].map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLevel(l)}
+                  className={`hover:text-[#1e3a8a] transition ${
+                    level === l ? "text-[#1e3a8a]" : ""
+                  }`}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+            <button className="bg-[#1e3a8a] hover:bg-[#152a5e] text-white font-bold px-8 py-4 text-sm uppercase tracking-wider transition">
+              Apply Now
+            </button>
+            <button className="bg-amber-500 hover:bg-amber-400 text-[#0a1232] font-bold px-8 py-4 text-sm uppercase tracking-wider transition">
+              View All
+            </button>
+          </div>
         </div>
       </div>
 
       <button
         onClick={() => setIdx((i) => (i - 1 + heroSlides.length) % heroSlides.length)}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur flex items-center justify-center transition"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
         aria-label="Previous"
       >
         <ChevronLeft size={22} />
       </button>
       <button
         onClick={() => setIdx((i) => (i + 1) % heroSlides.length)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur flex items-center justify-center transition"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
         aria-label="Next"
       >
         <ChevronRight size={22} />
       </button>
 
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+      <div className="absolute bottom-[130px] left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroSlides.map((_, i) => (
           <button
             key={i}
             onClick={() => setIdx(i)}
-            className={`h-1.5 rounded-full transition-all ${
-              i === idx ? "w-8 bg-amber-300" : "w-4 bg-white/50 hover:bg-white/80"
+            className={`h-1.5 rounded-full transition-all duration-500 ${
+              i === idx ? "w-10 bg-amber-400" : "w-4 bg-white/40 hover:bg-white/80"
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
       </div>
+
+      <style>{`
+        @keyframes kenburns { 0% { transform: scale(1) translate(0,0);} 100% { transform: scale(1.12) translate(-1%, -1%);} }
+        .animate-kenburns { animation: kenburns 8s ease-out forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .slide-enter-1 { animation: slideUp 0.7s ease-out 0.1s both; }
+        .slide-enter-2 { animation: slideUp 0.8s ease-out 0.25s both; }
+        .slide-enter-3 { animation: slideUp 0.8s ease-out 0.4s both; }
+        .slide-enter-4 { animation: slideUp 0.8s ease-out 0.55s both; }
+        .slide-enter-5 { animation: slideUp 0.8s ease-out 0.7s both; }
+      `}</style>
     </section>
   );
 }

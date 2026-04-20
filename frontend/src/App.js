@@ -3,6 +3,7 @@ import TopBar from "./components/TopBar";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
+import Colleges from "./components/Colleges";
 import Programmes from "./components/Programmes";
 import CampusLife from "./components/CampusLife";
 import Research from "./components/Research";
@@ -21,11 +22,12 @@ function App() {
       <Navbar />
       <Hero />
       <Marquee />
+      <Colleges />
       <Programmes />
+      <About />
       <CampusLife />
       <Research />
       <Placements />
-      <About />
       <Happenings />
       <SocialWall />
       <Footer />
