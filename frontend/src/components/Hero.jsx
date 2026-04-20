@@ -111,15 +111,6 @@ export default function Hero() {
                 <span className="relative z-10">Apply Now</span>
                 <span className="absolute inset-0 bg-amber-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
               </button>
-              <button
-                onClick={() => scrollToId("campus")}
-                className="group inline-flex items-center gap-2.5 text-white font-semibold text-sm"
-              >
-                <span className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center group-hover:bg-amber-400 group-hover:border-amber-400 group-hover:text-[#0a1232] transition">
-                  <Play size={13} fill="currentColor" />
-                </span>
-                Virtual Tour
-              </button>
             </div>
           </div>
 
