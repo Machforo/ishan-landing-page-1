@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative w-full h-[620px] md:h-[740px] overflow-hidden bg-[#0a1232]"
+      className="relative w-full h-[100svh] min-h-[640px] max-h-[820px] overflow-hidden bg-[#0a1232]"
     >
       {heroSlides.map((s, i) => (
         <div
@@ -40,36 +40,35 @@ export default function Hero() {
             alt={s.tag}
             className={`w-full h-full object-cover ${i === idx ? "animate-kenburns" : ""}`}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1232]/90 via-[#0a1232]/60 to-[#0a1232]/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1232]/70 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1232]/90 via-[#0a1232]/55 to-[#0a1232]/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1232]/75 via-transparent to-[#0a1232]/40" />
         </div>
       ))}
 
-      <div className="absolute top-8 left-6 lg:left-10 z-20 flex items-center gap-2 text-white/80 text-[11px] tracking-[0.35em] uppercase">
-        <span className="w-8 h-px bg-amber-400" />
-        Admissions 2026-27
-      </div>
-
-      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 lg:px-10 flex flex-col justify-center pb-28 text-white">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-center">
+      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 lg:px-10 flex flex-col justify-center pt-24 pb-28 text-white">
+        <div className="inline-flex items-center gap-2 text-white/80 text-[11px] tracking-[0.35em] uppercase mb-4 slide-enter-1">
+          <span className="w-8 h-px bg-amber-400" />
+          Admissions 2026-27
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 items-center">
           <div key={slide.id} className="max-w-2xl">
-            <div className="inline-block px-4 py-1.5 bg-[#1e3a8a] text-[11px] font-bold tracking-[0.25em] mb-5 slide-enter-1">
+            <div className="inline-block px-4 py-1.5 bg-[#1e3a8a] text-[10px] font-bold tracking-[0.25em] mb-4 slide-enter-1">
               {slide.tag}
             </div>
-            <h1 className="font-serif text-3xl md:text-5xl lg:text-[52px] font-bold leading-[1.08] mb-5 slide-enter-2">
+            <h1 className="font-serif text-3xl md:text-4xl lg:text-[44px] font-bold leading-[1.1] mb-4 slide-enter-2">
               {slide.title}
             </h1>
-            <p className="text-base md:text-lg text-gray-200 mb-6 max-w-xl slide-enter-3">
+            <p className="text-sm md:text-base text-gray-200 mb-5 max-w-xl slide-enter-3">
               {slide.subtitle}
             </p>
 
             {slide.specialisations && (
-              <div className="mb-6 slide-enter-4">
-                <h4 className="text-amber-400 font-semibold text-sm mb-2 tracking-wide">
+              <div className="mb-5 slide-enter-4">
+                <h4 className="text-amber-400 font-semibold text-xs mb-2 tracking-wide">
                   Specialisations
                 </h4>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm max-w-lg">
-                  {slide.specialisations.map((s) => (
+                <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-[13px] max-w-lg">
+                  {slide.specialisations.slice(0, 6).map((s) => (
                     <span key={s} className="text-gray-100">
                       • {s}
                     </span>
@@ -79,11 +78,11 @@ export default function Hero() {
             )}
 
             {slide.programs && (
-              <div className="flex flex-wrap gap-4 mb-6 slide-enter-4">
+              <div className="flex flex-wrap gap-4 mb-5 slide-enter-4">
                 {slide.programs.map((p) => (
                   <div
                     key={p}
-                    className="text-lg md:text-xl font-serif font-semibold text-amber-400 border-b-2 border-amber-400/40 pb-1"
+                    className="text-base md:text-lg font-serif font-semibold text-amber-400 border-b-2 border-amber-400/40 pb-1"
                   >
                     {p}
                   </div>
@@ -92,13 +91,13 @@ export default function Hero() {
             )}
 
             {slide.stats && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 slide-enter-4">
+              <div className="grid grid-cols-4 gap-3 mb-5 max-w-xl slide-enter-4">
                 {slide.stats.map((st) => (
                   <div key={st.label}>
-                    <div className="text-3xl md:text-4xl font-serif font-bold text-amber-400">
+                    <div className="text-2xl md:text-3xl font-serif font-bold text-amber-400">
                       {st.num}
                     </div>
-                    <div className="text-xs text-gray-200 leading-tight">{st.label}</div>
+                    <div className="text-[11px] text-gray-200 leading-tight">{st.label}</div>
                   </div>
                 ))}
               </div>
@@ -107,24 +106,24 @@ export default function Hero() {
             <div className="flex items-center gap-4 slide-enter-5">
               <button
                 onClick={() => scrollToId("contact")}
-                className="relative inline-flex items-center gap-2 bg-amber-500 text-[#0a1232] font-bold px-7 py-3.5 text-sm uppercase tracking-wider shadow-xl overflow-hidden group"
+                className="relative inline-flex items-center gap-2 bg-amber-500 text-[#0a1232] font-bold px-6 py-3 text-sm uppercase tracking-wider shadow-xl overflow-hidden group"
               >
                 <span className="relative z-10">Apply Now</span>
                 <span className="absolute inset-0 bg-amber-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
               </button>
               <button
                 onClick={() => scrollToId("campus")}
-                className="group inline-flex items-center gap-3 text-white font-semibold text-sm"
+                className="group inline-flex items-center gap-2.5 text-white font-semibold text-sm"
               >
-                <span className="w-11 h-11 rounded-full border border-white/60 flex items-center justify-center group-hover:bg-amber-400 group-hover:border-amber-400 group-hover:text-[#0a1232] transition">
-                  <Play size={14} fill="currentColor" />
+                <span className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center group-hover:bg-amber-400 group-hover:border-amber-400 group-hover:text-[#0a1232] transition">
+                  <Play size={13} fill="currentColor" />
                 </span>
                 Virtual Tour
               </button>
             </div>
           </div>
 
-          {/* News flash panel on right */}
+          {/* Bigger NewsFlash */}
           <div className="hidden lg:block slide-enter-5">
             <NewsFlash />
           </div>
@@ -132,19 +131,22 @@ export default function Hero() {
       </div>
 
       {/* Find Programmes bar */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#0a1232] via-[#0a1232]/95 to-transparent pt-10 pb-5">
+      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#0a1232] via-[#0a1232]/90 to-transparent pt-8 pb-4">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="flex items-center gap-3 bg-white shadow-2xl">
-            <div className="pl-5 pr-2 py-4">
-              <Search className="text-[#1e3a8a]" size={20} />
+            <div className="pl-4 pr-2 py-3">
+              <Search className="text-[#1e3a8a]" size={18} />
             </div>
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") scrollToId("programmes");
+              }}
               placeholder="Find Programmes"
-              className="flex-1 py-4 text-base text-gray-800 outline-none placeholder:text-gray-400"
+              className="flex-1 py-3 text-sm text-gray-800 outline-none placeholder:text-gray-400"
             />
-            <div className="hidden md:flex items-center gap-5 px-4 text-[13px] font-semibold text-gray-700">
+            <div className="hidden md:flex items-center gap-4 px-3 text-[12px] font-semibold text-gray-700">
               {["Undergraduate", "Postgraduate", "Diploma", "Doctoral"].map((l) => (
                 <button
                   key={l}
@@ -162,13 +164,13 @@ export default function Hero() {
             </div>
             <button
               onClick={() => scrollToId("contact")}
-              className="bg-[#1e3a8a] hover:bg-[#152a5e] text-white font-bold px-8 py-4 text-sm uppercase tracking-wider transition"
+              className="bg-[#1e3a8a] hover:bg-[#152a5e] text-white font-bold px-6 py-3 text-xs uppercase tracking-wider transition"
             >
               Apply Now
             </button>
             <button
               onClick={() => scrollToId("programmes")}
-              className="bg-amber-500 hover:bg-amber-400 text-[#0a1232] font-bold px-8 py-4 text-sm uppercase tracking-wider transition"
+              className="bg-amber-500 hover:bg-amber-400 text-[#0a1232] font-bold px-6 py-3 text-xs uppercase tracking-wider transition"
             >
               View All
             </button>
@@ -178,20 +180,20 @@ export default function Hero() {
 
       <button
         onClick={() => setIdx((i) => (i - 1 + heroSlides.length) % heroSlides.length)}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
         aria-label="Previous"
       >
-        <ChevronLeft size={22} />
+        <ChevronLeft size={20} />
       </button>
       <button
         onClick={() => setIdx((i) => (i + 1) % heroSlides.length)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
         aria-label="Next"
       >
-        <ChevronRight size={22} />
+        <ChevronRight size={20} />
       </button>
 
-      <div className="absolute bottom-[130px] left-1/2 -translate-x-1/2 z-20 flex gap-2">
+      <div className="absolute bottom-[120px] left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroSlides.map((_, i) => (
           <button
             key={i}

@@ -1,5 +1,4 @@
 import React from "react";
-import TopBar from "./components/TopBar";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
@@ -19,7 +18,6 @@ import "./App.css";
 function App() {
   return (
     <div className="App bg-white">
-      <TopBar />
       <Navbar />
       <Hero />
       <Marquee />

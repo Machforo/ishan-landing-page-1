@@ -162,16 +162,46 @@ export const campusLife = [
     id: 1,
     title: "Events & Celebrations",
     image: "https://images.pexels.com/photos/31968811/pexels-photo-31968811.jpeg?w=800",
+    gallery: [
+      "https://images.pexels.com/photos/31968811/pexels-photo-31968811.jpeg?w=1200",
+      "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200",
+      "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=1200",
+      "https://images.unsplash.com/photo-1607013407627-6ee814329547?w=1200",
+      "https://images.pexels.com/photos/18012459/pexels-photo-18012459.jpeg?w=1200",
+      "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=1200",
+    ],
+    description:
+      "From annual fests to cultural nights, TEDx talks and convocation ceremonies — campus life at Ishan is vibrant, inclusive and unforgettable.",
   },
   {
     id: 2,
     title: "Clubs & Societies",
     image: "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=800",
+    gallery: [
+      "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=1200",
+      "https://images.unsplash.com/photo-1637589316488-6d4c41b335cd?w=1200",
+      "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1200",
+      "https://images.pexels.com/photos/12497061/pexels-photo-12497061.jpeg?w=1200",
+      "https://images.unsplash.com/photo-1576495199011-eb94736d05d6?w=1200",
+      "https://images.pexels.com/photos/16767715/pexels-photo-16767715.jpeg?w=1200",
+    ],
+    description:
+      "Debate society, moot court club, pharma innovators, entrepreneurship cell, cultural troupes — 30+ active student-run clubs.",
   },
   {
     id: 3,
     title: "Sports & Fitness",
     image: "https://images.unsplash.com/photo-1737825101103-c35677e6bd45?w=800",
+    gallery: [
+      "https://images.unsplash.com/photo-1737825101103-c35677e6bd45?w=1200",
+      "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1200",
+      "https://images.pexels.com/photos/31040302/pexels-photo-31040302.jpeg?w=1200",
+      "https://images.pexels.com/photos/31968811/pexels-photo-31968811.jpeg?w=1200",
+      "https://images.unsplash.com/photo-1607013407627-6ee814329547?w=1200",
+      "https://images.unsplash.com/photo-1623461487986-9400110de28e?w=1200",
+    ],
+    description:
+      "Cricket ground, basketball court, lawn tennis, badminton, table tennis, modern gym, yoga pavilion — athletics at Ishan nurtures champions.",
   },
 ];
 
