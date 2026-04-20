@@ -1,38 +1,22 @@
 import React from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Marquee from "./components/Marquee";
-import Colleges from "./components/Colleges";
-import Programmes from "./components/Programmes";
-import CampusLife from "./components/CampusLife";
-import Research from "./components/Research";
-import Placements from "./components/Placements";
-import About from "./components/About";
-import Happenings from "./components/Happenings";
-import SocialWall from "./components/SocialWall";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import FloatingWidgets from "./components/FloatingWidgets";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingA from "./pages/LandingA";
+import LandingB from "./pages/LandingB";
+import VariantSwitcher from "./components/v2/VariantSwitcher";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App bg-white">
-      <Navbar />
-      <Hero />
-      <Marquee />
-      <Colleges />
-      <Programmes />
-      <About />
-      <CampusLife />
-      <Research />
-      <Placements />
-      <Happenings />
-      <SocialWall />
-      <Contact />
-      <Footer />
-      <FloatingWidgets />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LandingA />} />
+          <Route path="/v2" element={<LandingB />} />
+          <Route path="*" element={<LandingA />} />
+        </Routes>
+        <VariantSwitcher />
+      </div>
+    </BrowserRouter>
   );
 }
 

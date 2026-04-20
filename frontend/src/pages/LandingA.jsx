@@ -1,0 +1,36 @@
+import React from "react";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import Marquee from "../components/Marquee";
+import Colleges from "../components/Colleges";
+import Programmes from "../components/Programmes";
+import CampusLife from "../components/CampusLife";
+import Research from "../components/Research";
+import Placements from "../components/Placements";
+import About from "../components/About";
+import Happenings from "../components/Happenings";
+import SocialWall from "../components/SocialWall";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
+import FloatingWidgets from "../components/FloatingWidgets";
+
+export default function LandingA() {
+  return (
+    <div className="bg-white" data-testid="landing-variant-a">
+      <Navbar />
+      <Hero />
+      <Marquee />
+      <Colleges />
+      <Programmes />
+      <About />
+      <CampusLife />
+      <Research />
+      <Placements />
+      <Happenings />
+      <SocialWall />
+      <Contact />
+      <Footer />
+      <FloatingWidgets />
+    </div>
+  );
+}
