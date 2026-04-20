@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+.App {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a1a;
+}
+
+.App h1, .App h2, .App h3, .App h4, .font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f0e8;
+}
+::-webkit-scrollbar-thumb {
+  background: #8B0000;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6d0000;
+}
+
+/* Selection */
+::selection {
+  background: #8B0000;
+  color: #fff;
+}
+
+/* line clamps */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
