@@ -61,13 +61,13 @@ export default function Navbar() {
     scrollTo(target);
   };
 
-  const darkText = scrolled;
+  const darkText = false;
 
   return (
     <>
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]" : "bg-transparent"
+          scrolled ? "bg-[#1e3a8a] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]" : "bg-transparent"
         }`}
       >
         <TopBar scrolled={scrolled} />

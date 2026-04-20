@@ -1,7 +1,7 @@
 // Mock data for Ishan Educational Institutions landing page
 
 export const ISHAN_LOGO =
-  "https://customer-assets.emergentagent.com/job_gdg-university-demo/artifacts/m5o7w32o_image.png";
+  "https://www.ishan.ac/icons/ishan-logo.svg";
 
 export const heroSlides = [
   {
