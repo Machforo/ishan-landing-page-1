@@ -91,7 +91,7 @@ export default function HeroV2() {
             <Sparkles size={12} /> Admissions Live · 2026-27
           </div>
 
-          <h1 className="font-serif font-bold leading-[1.02] text-[42px] md:text-[58px] lg:text-[70px] mt-5 v2-enter-2">
+          <h1 className="font-serif font-bold leading-[1.02] text-[28px] md:text-[36px] lg:text-[44px] mt-5 v2-enter-2">
             Where India's
             <br />
             <span className="text-amber-400 italic">ambition</span> meets
@@ -113,7 +113,7 @@ export default function HeroV2() {
             <div className="text-[10px] font-bold tracking-[0.3em] text-amber-400 uppercase">
               {slide.tag}
             </div>
-            <div className="text-white font-serif text-lg md:text-xl mt-1 leading-snug">
+            <div className="text-white font-serif text-base md:text-lg mt-1 leading-snug">
               {slide.title}
             </div>
           </div>
@@ -192,7 +192,7 @@ export default function HeroV2() {
                   <div className="text-[10px] tracking-[0.28em] text-amber-300 font-bold uppercase mb-1">
                     Start Your Journey
                   </div>
-                  <h3 className="font-serif text-[22px] font-bold leading-tight">
+                  <h3 className="font-serif text-lg font-bold leading-tight">
                     Apply in 2 minutes
                   </h3>
                   <p className="text-[11.5px] text-white/70 mt-1">

@@ -24,7 +24,7 @@ export default function Research() {
             for <span className="italic text-[#1e3a8a]">breakthroughs</span>
           </h2>
           <p className="text-gray-600 mt-5 leading-relaxed text-[15px] max-w-lg">
-            At GD Goenka University, research is a commitment to discovery. Explore publications,
+            At Ishan Educational Institutions, research is a commitment to discovery. Explore publications,
             funded projects and collaborations across disciplines.
           </p>
           <a
