@@ -8,7 +8,7 @@ const SECTION_MAP = {
   "Awards & Rankings": "about", "Approvals & Affiliations": "about", "Group Timeline (Since 1994)": "about",
   "Ishan Institute of Law": "colleges", "Ishan Institute of Management & Technology": "colleges",
   "Ishan Institute of Pharmacy": "colleges", "Ishan Ayurvedic Medical Sciences": "colleges",
-  "Ishan Institute of Education": "colleges", "All Colleges — Gateway": "colleges",
+  "Ishan Institute of Education": "colleges", "All Colleges, Gateway": "colleges",
   "Admissions Overview": "programmes", "All UG + PG Programs": "programmes", Scholarships: "programmes",
   "International / NRI Admissions": "programmes", "Fee Structure": "programmes", "How to Apply": "programmes",
   "Placements Overview": "placements", "Our Recruiters": "placements", "Alumni Network": "placements",
@@ -85,29 +85,7 @@ export default function Navbar() {
                   darkText ? "" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
                 }`}
               />
-              <div
-                className={`hidden 2xl:flex flex-col leading-[1.1] border-l-2 pl-3 transition-colors ${
-                  darkText ? "border-gray-200" : "border-white/30"
-                }`}
-              >
-                <span
-                  className={`text-[20px] font-bold tracking-wider font-serif transition-colors ${
-                    darkText ? "text-[#1e3a8a]" : "text-white"
-                  }`}
-                >
-                  ISHAN
-                </span>
-                <span
-                  className={`text-[9px] tracking-[0.2em] font-semibold mt-0.5 transition-colors ${
-                    darkText ? "text-gray-700" : "text-white/90"
-                  }`}
-                >
-                  EDUCATIONAL INSTITUTIONS
-                </span>
-                <span className="text-amber-400 text-[10px] italic font-semibold mt-0.5">
-                  Since 1994
-                </span>
-              </div>
+
             </a>
 
             <nav
@@ -242,7 +220,7 @@ export default function Navbar() {
                       {activeMenu}
                     </h3>
                     <p className="text-xs text-white/80 mt-3 relative z-10 leading-relaxed">
-                      Discover the legacy of Ishan — 30+ years, 5 colleges, 50,000+ alumni.
+                      Discover the legacy of Ishan, 30+ years, 5 colleges, 50,000+ alumni.
                     </p>
                     <a
                       href={`#${MENU_DEFAULTS[activeMenu] || "top"}`}

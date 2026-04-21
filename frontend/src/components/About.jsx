@@ -26,11 +26,11 @@ export default function About() {
             </span>
             <h2 className="font-serif text-3xl md:text-[42px] font-bold mt-4 leading-[1.15]">
               The first multi-disciplinary institution of{" "}
-              <span className="text-amber-400">Greater Noida</span> — shaping professionals since 1994
+              <span className="text-amber-400">Greater Noida</span>, shaping professionals since 1994
             </h2>
             <p className="mt-5 text-gray-300 leading-relaxed text-[15px] max-w-lg">
               From a single management institute to five thriving colleges across Law, Management,
-              Pharmacy, Ayurveda and Education — Ishan has grown into one of North India's most
+              Pharmacy, Ayurveda and Education, Ishan has grown into one of North India's most
               respected names in higher education, with 50,000+ alumni in leadership roles worldwide.
             </p>
             <a

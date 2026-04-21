@@ -17,7 +17,7 @@ export const heroSlides = [
     image: "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=1920",
     tag: "ISHAN INSTITUTE OF LAW",
     title: "Shaping India's Next Generation of Legal Minds",
-    subtitle: "BCI-approved BA LL.B • BBA LL.B • LL.M — Admissions Open 2026-27",
+    subtitle: "BCI-approved BA LL.B • BBA LL.B • LL.M, Admissions Open 2026-27",
     specialisations: [
       "Constitutional Law",
       "Corporate Law",
@@ -42,7 +42,7 @@ export const heroSlides = [
     image: "https://images.pexels.com/photos/18012459/pexels-photo-18012459.jpeg?w=1920",
     tag: "ISHAN INSTITUTE OF AYURVEDIC MEDICAL SCIENCES",
     title: "Heal. Serve. Lead.",
-    subtitle: "NCISM approved BAMS programme — Ayurveda for modern healthcare",
+    subtitle: "NCISM approved BAMS programme, Ayurveda for modern healthcare",
     programs: ["BAMS (Bachelor of Ayurvedic Medicine & Surgery)"],
   },
   {
@@ -69,14 +69,14 @@ export const programCategories = [
 
 export const programs = {
   ug: [
-    { name: "BA LL.B (Hons.) — 5 Year Integrated", school: "Ishan Institute of Law" },
-    { name: "BBA LL.B (Hons.) — 5 Year Integrated", school: "Ishan Institute of Law" },
-    { name: "LL.B (Hons.) — 3 Year", school: "Ishan Institute of Law" },
+    { name: "BA LL.B (Hons.), 5 Year Integrated", school: "Ishan Institute of Law" },
+    { name: "BBA LL.B (Hons.), 5 Year Integrated", school: "Ishan Institute of Law" },
+    { name: "LL.B (Hons.), 3 Year", school: "Ishan Institute of Law" },
     { name: "BBA (Bachelor of Business Administration)", school: "Ishan Institute of Management" },
     { name: "B.Com (Hons.)", school: "Ishan Institute of Management" },
     { name: "BCA (Bachelor of Computer Applications)", school: "Ishan Institute of Management" },
     { name: "B.Pharm (Bachelor of Pharmacy)", school: "Ishan Institute of Pharmacy" },
-    { name: "BAMS — Bachelor of Ayurvedic Medicine & Surgery", school: "Ishan Ayurvedic Medical Sciences" },
+    { name: "BAMS, Bachelor of Ayurvedic Medicine & Surgery", school: "Ishan Ayurvedic Medical Sciences" },
     { name: "B.Ed (Bachelor of Education)", school: "Ishan Institute of Education" },
     { name: "B.El.Ed (Elementary Education)", school: "Ishan Institute of Education" },
     { name: "B.Sc Nursing", school: "Ishan Institute of Medical Sciences" },
@@ -87,8 +87,8 @@ export const programs = {
     { name: "MBA (Master of Business Administration)", school: "Ishan Institute of Management" },
     { name: "M.Com (Master of Commerce)", school: "Ishan Institute of Management" },
     { name: "LL.M (Master of Laws)", school: "Ishan Institute of Law" },
-    { name: "M.Pharm — Pharmaceutics", school: "Ishan Institute of Pharmacy" },
-    { name: "M.Pharm — Pharmacology", school: "Ishan Institute of Pharmacy" },
+    { name: "M.Pharm, Pharmaceutics", school: "Ishan Institute of Pharmacy" },
+    { name: "M.Pharm, Pharmacology", school: "Ishan Institute of Pharmacy" },
     { name: "MD Ayurveda", school: "Ishan Ayurvedic Medical Sciences" },
     { name: "M.Ed (Master of Education)", school: "Ishan Institute of Education" },
     { name: "MCA (Master of Computer Applications)", school: "Ishan Institute of Management" },
@@ -171,7 +171,7 @@ export const campusLife = [
       "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=1200",
     ],
     description:
-      "From annual fests to cultural nights, TEDx talks and convocation ceremonies — campus life at Ishan is vibrant, inclusive and unforgettable.",
+      "From annual fests to cultural nights, TEDx talks and convocation ceremonies, campus life at Ishan is vibrant, inclusive and unforgettable.",
   },
   {
     id: 2,
@@ -186,7 +186,7 @@ export const campusLife = [
       "https://images.pexels.com/photos/16767715/pexels-photo-16767715.jpeg?w=1200",
     ],
     description:
-      "Debate society, moot court club, pharma innovators, entrepreneurship cell, cultural troupes — 30+ active student-run clubs.",
+      "Debate society, moot court club, pharma innovators, entrepreneurship cell, cultural troupes, 30+ active student-run clubs.",
   },
   {
     id: 3,
@@ -201,7 +201,7 @@ export const campusLife = [
       "https://images.unsplash.com/photo-1623461487986-9400110de28e?w=1200",
     ],
     description:
-      "Cricket ground, basketball court, lawn tennis, badminton, table tennis, modern gym, yoga pavilion — athletics at Ishan nurtures champions.",
+      "Cricket ground, basketball court, lawn tennis, badminton, table tennis, modern gym, yoga pavilion, athletics at Ishan nurtures champions.",
   },
 ];
 
@@ -276,7 +276,7 @@ export const testimonials = [
   {
     id: 2,
     quote:
-      "From PGDM classroom to corporate boardroom — Ishan's placement team opened doors I didn't know existed.",
+      "From PGDM classroom to corporate boardroom, Ishan's placement team opened doors I didn't know existed.",
     name: "Priya Sharma",
     course: "PGDM",
     batch: "2020-22",
@@ -336,13 +336,13 @@ export const news = [
 
 export const socialPosts = [
   { id: 1, likes: 412, image: "https://images.unsplash.com/photo-1637589316488-6d4c41b335cd?w=400", caption: "Guest lecture by Senior Advocate on constitutional law..." },
-  { id: 2, likes: 1280, image: "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=400", caption: "Annual Sports Day 2026 highlights — energy, spirit, glory..." },
+  { id: 2, likes: 1280, image: "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=400", caption: "Annual Sports Day 2026 highlights, energy, spirit, glory..." },
   { id: 3, likes: 680, image: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400", caption: "Ayurveda awareness camp in collaboration with local community..." },
   { id: 4, likes: 220, image: "https://images.unsplash.com/photo-1737825101103-c35677e6bd45?w=400", caption: "Research paper presentation at National Pharma Conference..." },
-  { id: 5, likes: 1540, image: "https://images.pexels.com/photos/18012459/pexels-photo-18012459.jpeg?w=400", caption: "Convocation 2025 — celebrating 1200+ graduating students..." },
+  { id: 5, likes: 1540, image: "https://images.pexels.com/photos/18012459/pexels-photo-18012459.jpeg?w=400", caption: "Convocation 2025, celebrating 1200+ graduating students..." },
   { id: 6, likes: 340, image: "https://images.unsplash.com/photo-1607013407627-6ee814329547?w=400", caption: "Industry visit to corporate HQ for PGDM batch 2024..." },
-  { id: 7, likes: 560, image: "https://images.pexels.com/photos/31968811/pexels-photo-31968811.jpeg?w=400", caption: "Teachers Day celebration at IIE — honoring our mentors..." },
-  { id: 8, likes: 190, image: "https://images.pexels.com/photos/16767715/pexels-photo-16767715.jpeg?w=400", caption: "Open House for Admissions 2026-27 — register today..." },
+  { id: 7, likes: 560, image: "https://images.pexels.com/photos/31968811/pexels-photo-31968811.jpeg?w=400", caption: "Teachers Day celebration at IIE, honoring our mentors..." },
+  { id: 8, likes: 190, image: "https://images.pexels.com/photos/16767715/pexels-photo-16767715.jpeg?w=400", caption: "Open House for Admissions 2026-27, register today..." },
 ];
 
 export const navMenu = [
@@ -365,7 +365,7 @@ export const navMenu = [
       "Ishan Institute of Pharmacy",
       "Ishan Ayurvedic Medical Sciences",
       "Ishan Institute of Education",
-      "All Colleges — Gateway",
+      "All Colleges, Gateway",
     ],
   },
   {

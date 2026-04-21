@@ -59,7 +59,7 @@ export default function Programmes() {
             </h2>
           </div>
           <p className="text-gray-600 max-w-md text-[15px] leading-relaxed">
-            Explore programmes across Law, Management, Pharmacy, Ayurveda and Education — approved
+            Explore programmes across Law, Management, Pharmacy, Ayurveda and Education, approved
             by BCI, AICTE, PCI, NCISM and NCTE.
           </p>
         </div>

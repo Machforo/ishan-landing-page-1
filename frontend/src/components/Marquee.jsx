@@ -3,7 +3,7 @@ import { Sparkles } from "lucide-react";
 
 export default function Marquee() {
   const text =
-    "Ishan Educational Institutions — Admissions Open 2026-27: BA/BBA LL.B • LL.M • PGDM • MBA • B.Com • BCA • B.Pharm • BAMS • B.Ed — 30+ years of academic excellence";
+    "Ishan Educational Institutions, Admissions Open 2026-27: BA/BBA LL.B • LL.M • PGDM • MBA • B.Com • BCA • B.Pharm • BAMS • B.Ed, 30+ years of academic excellence";
   return (
     <div className="w-full bg-amber-500 text-[#0a1232] py-3 overflow-hidden relative group">
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-amber-500 to-transparent z-10 pointer-events-none" />
