@@ -45,30 +45,23 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center mb-5">
               <img src={ISHAN_LOGO} alt="Ishan" className="h-14 w-auto" />
-              <div className="leading-tight border-l border-white/20 pl-3">
-                <div className="text-white font-serif font-bold">ISHAN</div>
-                <div className="text-[9px] text-amber-400 tracking-[0.2em]">
-                  EDUCATIONAL INSTITUTIONS
-                </div>
-                <div className="text-[9px] text-white/60 italic">Since 1994</div>
-              </div>
             </div>
             <p className="text-sm leading-relaxed text-gray-400 mb-5">
-              The first multi-disciplinary institution of Greater Noida — five colleges, one
+              The first multidisciplinary institution of Greater Noida, five colleges, one
               legacy.
             </p>
             <div className="space-y-2 text-sm">
               <div className="flex items-start gap-2">
                 <MapPin size={14} className="text-amber-400 mt-1 shrink-0" />
-                <span>Knowledge Park-1, Greater Noida, Uttar Pradesh 201310</span>
+                <span>Knowledge Park, 1, Greater Noida, Uttar Pradesh 201310</span>
               </div>
               <a
                 href="tel:+911204321400"
                 className="flex items-center gap-2 hover:text-amber-400 transition"
               >
-                <Phone size={14} className="text-amber-400" /> +91-120-4321400
+                <Phone size={14} className="text-amber-400" /> +91, 120, 4321400
               </a>
               <a
                 href="mailto:admissions@ishan.ac"
