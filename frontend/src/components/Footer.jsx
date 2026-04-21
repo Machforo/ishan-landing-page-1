@@ -47,16 +47,10 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <img src={ISHAN_LOGO} alt="Ishan" className="h-14 w-auto" />
-              <div className="leading-tight border-l border-white/20 pl-3">
-                <div className="text-white font-serif font-bold">ISHAN</div>
-                <div className="text-[9px] text-amber-400 tracking-[0.2em]">
-                  EDUCATIONAL INSTITUTIONS
-                </div>
-                <div className="text-[9px] text-white/60 italic">Since 1994</div>
-              </div>
+
             </div>
             <p className="text-sm leading-relaxed text-gray-400 mb-5">
-              The first multi-disciplinary institution of Greater Noida — five colleges, one
+              The first multi-disciplinary institution of Greater Noida, five colleges, one
               legacy.
             </p>
             <div className="space-y-2 text-sm">

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Megaphone, ArrowRight, Zap, X } from "lucide-react";
 
 const TICKER = [
-  { tag: "BREAKING", date: "Today", title: "Admissions Open 2026-27 — Apply with Early Bird Scholarship", body: "Early-bird scholarships up to 50% tuition fee. Limited seats across all 5 colleges." },
+  { tag: "BREAKING", date: "Today", title: "Admissions Open 2026-27, Apply with Early Bird Scholarship", body: "Early-bird scholarships up to 50% tuition fee. Limited seats across all 5 colleges." },
   { tag: "EVENT", date: "15 Feb", title: "National Moot Court Competition at Ishan Institute of Law", body: "Teams from 40+ law schools competing. Supreme Court judges as panelists." },
   { tag: "ACHIEVEMENT", date: "10 Apr", title: "Ishan Pharmacy students win National Research Paper Award", body: "Three B.Pharm students bag gold at All-India Pharma Research Conclave 2026." },
   { tag: "NEW", date: "22 Mar", title: "IIMT hosts Annual Management Conclave 2026 with industry leaders", body: "CEOs from Infosys, TCS, Deloitte address 500+ students on future of work." },
   { tag: "UPDATE", date: "05 May", title: "BAMS Free Medical Camp serves 1000+ villagers in Greater Noida", body: "Ayurveda consultation, Panchakarma sessions, free medicines and awareness." },
-  { tag: "PLACEMENT", date: "28 Apr", title: "Record placements — 500+ recruiters this season across 5 colleges", body: "Highest package INR 24 LPA. Average 98% placement rate across departments." },
+  { tag: "PLACEMENT", date: "28 Apr", title: "Record placements, 500+ recruiters this season across 5 colleges", body: "Highest package INR 24 LPA. Average 98% placement rate across departments." },
 ];
 
 export default function NewsFlash() {

@@ -181,7 +181,7 @@ export default function HeroV2() {
           </div>
         </div>
 
-        {/* RIGHT — STICKY ENQUIRY FORM */}
+        {/* RIGHT, STICKY ENQUIRY FORM */}
         <div className="v2-enter-5 lg:sticky lg:top-28">
           <div className="relative">
             {/* accent frame */}

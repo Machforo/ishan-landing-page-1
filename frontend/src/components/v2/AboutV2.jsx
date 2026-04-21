@@ -50,8 +50,8 @@ export default function AboutV2() {
             <p className="mt-5 text-gray-600 text-[15px] leading-relaxed">
               Ishan Educational Institutions was founded in 1994 with a singular
               purpose: to build an academic group that prepares professionals for the
-              real world. Today, our five colleges — Law, Management & Technology,
-              Pharmacy, Ayurveda and Education — share one Greater Noida campus,
+              real world. Today, our five colleges, Law, Management & Technology,
+              Pharmacy, Ayurveda and Education, share one Greater Noida campus,
               200+ faculty, and a network of 50,000+ alumni across the globe.
             </p>
 
