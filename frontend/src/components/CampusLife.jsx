@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { campusLife, campusLinks, facilityLinks } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ArrowRight, MapPin, Users, Trophy, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 
 export default function CampusLife() {
+  const { data } = useContext(DataContext);
   const [active, setActive] = useState(null); // facility object or null
   const [photo, setPhoto] = useState(0);
 
@@ -55,13 +57,13 @@ export default function CampusLife() {
             <div className="flex flex-col justify-between bg-gradient-to-br from-[#1e3a8a] to-[#0a1232] text-white p-8 relative overflow-hidden h-full min-h-[480px]">
               <div>
                 <div className="text-6xl md:text-7xl font-serif font-bold text-amber-400">
-                  <Counter end={45} suffix="+" />
+                  <Counter end={data.campusLifeStats?.nationalitiesCount || 45} suffix="+" />
                 </div>
                 <div className="text-sm tracking-wide mt-2">Nationalities</div>
                 <div className="text-lg font-serif">on Campus</div>
               </div>
               <div className="mt-8 space-y-3 text-sm relative z-10">
-                {campusLinks.map((l) => (
+                {data.campusLinks.map((l) => (
                   <a
                     key={l}
                     href="#campus"
@@ -81,7 +83,7 @@ export default function CampusLife() {
           </Reveal>
 
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {campusLife.map((c, i) => (
+            {data.campusLife.map((c, i) => (
               <Reveal key={c.id} delay={i * 150}>
                 <button
                   onClick={() => setActive(c)}
@@ -115,7 +117,7 @@ export default function CampusLife() {
             ))}
 
             <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {facilityLinks.map((f, i) => (
+              {data.facilityLinks.map((f, i) => (
                 <Reveal key={f} delay={300 + i * 100}>
                   <a
                     href="#campus"

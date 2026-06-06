@@ -1,5 +1,6 @@
 import React from "react";
-import { footerLinks, navMenu, ISHAN_LOGO } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube, Linkedin } from "lucide-react";
 
 const FOOTER_MAP = {
@@ -36,8 +37,9 @@ const scrollToId = (e, id) => {
 };
 
 export default function Footer() {
-  const about = navMenu[0];
-  const admissions = navMenu[2];
+  const { data } = useContext(DataContext);
+  const about = data.navMenu[0];
+  const admissions = data.navMenu[2];
   const pick = (label, fallback) => FOOTER_MAP[label] || fallback || "top";
 
   return (
@@ -46,7 +48,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-1">
             <div className="flex items-center mb-5">
-              <img src={ISHAN_LOGO} alt="Ishan" className="h-14 w-auto" />
+              <img src={data.ISHAN_LOGO} alt="Ishan" className="h-14 w-auto" />
             </div>
             <p className="text-sm leading-relaxed text-gray-400 mb-5">
               The first multidisciplinary institution of Greater Noida, five colleges, one
@@ -121,7 +123,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-serif font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              {footerLinks.quickLinks.map((i) => (
+              {data.footerLinks.quickLinks.map((i) => (
                 <li key={i}>
                   <a
                     href={`#${pick(i, "contact")}`}
@@ -138,7 +140,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-serif font-bold mb-4">Approvals</h4>
             <ul className="space-y-2 text-sm">
-              {footerLinks.rankings.map((i) => (
+              {data.footerLinks.rankings.map((i) => (
                 <li key={i}>
                   <a
                     href={`#${pick(i, "about")}`}
@@ -152,7 +154,7 @@ export default function Footer() {
             </ul>
             <h4 className="text-white font-serif font-bold mb-3 mt-6">Ishan Group</h4>
             <ul className="space-y-2 text-sm">
-              {footerLinks.group.map((i) => (
+              {data.footerLinks.group.map((i) => (
                 <li key={i}>
                   <a
                     href={`#${pick(i, "about")}`}

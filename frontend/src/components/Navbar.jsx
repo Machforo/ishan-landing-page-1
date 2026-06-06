@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Search, ChevronDown, Phone, ArrowRight } from "lucide-react";
-import { navMenu, ISHAN_LOGO } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import TopBar from "./TopBar";
 
 const SECTION_MAP = {
@@ -43,6 +44,7 @@ const menuIcons = {
 };
 
 export default function Navbar() {
+  const { data } = useContext(DataContext);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
@@ -79,7 +81,7 @@ export default function Navbar() {
               className="flex items-center gap-3 group shrink-0"
             >
               <img
-                src={ISHAN_LOGO}
+                src={data.ISHAN_LOGO}
                 alt="Ishan Educational Institutions"
                 className={`h-14 lg:h-[60px] w-auto object-contain group-hover:scale-105 transition-all ${
                   darkText ? "" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
@@ -92,7 +94,7 @@ export default function Navbar() {
               className="hidden xl:flex items-center"
               onMouseLeave={() => setActiveMenu(null)}
             >
-              {navMenu.map((m) => (
+              {data.navMenu.map((m) => (
                 <div
                   key={m.title}
                   className="relative"
@@ -231,7 +233,7 @@ export default function Navbar() {
                     </a>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-1">
-                    {navMenu
+                    {data.navMenu
                       .find((x) => x.title === activeMenu)
                       ?.items.map((it, i) => (
                         <a
@@ -279,7 +281,7 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="px-2 py-3">
-              {navMenu.map((m) => (
+              {data.navMenu.map((m) => (
                 <details key={m.title} className="border-b border-gray-100 group">
                   <summary className="flex items-center justify-between px-3 py-3.5 cursor-pointer text-[14px] font-semibold uppercase text-gray-800 list-none group-open:text-[#1e3a8a]">
                     <span className="flex items-center gap-2">

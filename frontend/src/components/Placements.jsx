@@ -1,10 +1,12 @@
 import React from "react";
-import { placementStats, recruiters, testimonials } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ArrowRight, Quote, Building2 } from "lucide-react";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 
 export default function Placements() {
+  const { data } = useContext(DataContext);
   return (
     <section id="placements" className="py-16 md:py-24 bg-gradient-to-b from-[#f5f7fb] to-white relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative">
@@ -48,7 +50,7 @@ export default function Placements() {
             </a>
 
             <div className="grid grid-cols-2 gap-5 mt-8">
-              {placementStats.map((s, i) => (
+              {data.placementStats.map((s, i) => (
                 <div
                   key={s.label}
                   className="p-5 bg-white border-l-4 border-[#1e3a8a] shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
@@ -76,7 +78,7 @@ export default function Placements() {
             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#f5f7fb] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
             <div className="flex gap-6 animate-[rmarquee_32s_linear_infinite]">
-              {[...recruiters, ...recruiters].map((r, i) => (
+              {[...data.recruiters, ...data.recruiters].map((r, i) => (
                 <div
                   key={i}
                   className="shrink-0 w-44 h-20 bg-white border border-gray-200 flex items-center justify-center gap-2 shadow-sm rounded hover:shadow-md hover:border-[#1e3a8a] transition-all"
@@ -91,7 +93,7 @@ export default function Placements() {
         </div>
 
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+          {data.testimonials.map((t, i) => (
             <Reveal key={t.id} delay={i * 150}>
               <div className="group bg-white p-7 border-t-4 border-[#1e3a8a] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full">
                 <Quote size={32} className="text-amber-400 mb-3 group-hover:scale-110 transition" />

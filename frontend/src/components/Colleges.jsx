@@ -1,9 +1,11 @@
 import React from "react";
-import { colleges } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ArrowRight, GraduationCap, ShieldCheck } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function Colleges() {
+  const { data } = useContext(DataContext);
   return (
     <section id="colleges" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{
@@ -29,7 +31,7 @@ export default function Colleges() {
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {colleges.map((c, i) => (
+          {data.colleges.map((c, i) => (
             <Reveal key={c.id} delay={i * 100}>
               <a
                 href="#"

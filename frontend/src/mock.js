@@ -449,3 +449,39 @@ export const footerLinks = {
   ],
   group: ["About Ishan", "5 Colleges", "Chairman's Message", "Media Room"],
 };
+
+
+export const contactInfo = {
+  location: "Greater Noida, UP",
+  admissionNumber: "+91-120-2326600",
+  email: "admissions@ishan.ac",
+  officeHours: "9:00 AM - 5:00 PM"
+};
+
+export const floatingWidgets = {
+  whatsapp: "911234567890",
+  phone: "+91-120-2326600",
+  applyLink: "https://ishan-ascend.vercel.app/admissions"
+};
+
+export const aboutContent = {
+  title: "The first multi-disciplinary institution of Greater Noida, shaping professionals since 1994",
+  description: "From a single management institute to five thriving colleges across Law, Management, Pharmacy, Ayurveda and Education, Ishan has grown into one of North India's most respected names in higher education, with 50,000+ alumni in leadership roles worldwide."
+};
+
+export const collegeSection = {
+  heading: "Our 5 Colleges",
+  subheading: "Specialist faculties. One campus."
+};
+
+export const programmeSection = {
+  heading: "Discover your future-ready programme",
+  subheading: "Explore programmes across Law, Management, Pharmacy, Ayurveda and Education, approved by BCI, AICTE, PCI, NCISM and NCTE."
+};
+
+export const researchSection = {
+  heading: "Research Hub",
+  subheading: "Driving innovation and academic excellence.",
+  ctaText: "Know More",
+  ctaLink: "#research"
+};

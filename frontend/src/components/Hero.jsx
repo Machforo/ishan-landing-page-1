@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { heroSlides } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ChevronLeft, ChevronRight, Play, Search } from "lucide-react";
 import NewsFlash from "./NewsFlash";
 
 export default function Hero() {
+  const { data } = useContext(DataContext);
   const [idx, setIdx] = useState(0);
   const [query, setQuery] = useState("");
   const [level, setLevel] = useState("Undergraduate");
 
   useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % heroSlides.length), 6500);
+    const t = setInterval(() => setIdx((i) => (i + 1) % data.heroSlides.length), 6500);
     return () => clearInterval(t);
-  }, []);
+  }, [data.heroSlides.length]);
 
-  const slide = heroSlides[idx];
+  const slide = data.heroSlides[idx];
+  if (!slide) return null;
 
   const scrollToId = (id) => {
     const el = document.getElementById(id);
@@ -28,7 +31,7 @@ export default function Hero() {
       id="top"
       className="relative w-full h-[100svh] min-h-[640px] max-h-[820px] overflow-hidden bg-[#0a1232]"
     >
-      {heroSlides.map((s, i) => (
+      {data.heroSlides.map((s, i) => (
         <div
           key={s.id}
           className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -170,14 +173,14 @@ export default function Hero() {
       </div>
 
       <button
-        onClick={() => setIdx((i) => (i - 1 + heroSlides.length) % heroSlides.length)}
+        onClick={() => setIdx((i) => (i - 1 + data.heroSlides.length) % data.heroSlides.length)}
         className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
         aria-label="Previous"
       >
         <ChevronLeft size={20} />
       </button>
       <button
-        onClick={() => setIdx((i) => (i + 1) % heroSlides.length)}
+        onClick={() => setIdx((i) => (i + 1) % data.heroSlides.length)}
         className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/15 hover:bg-[#1e3a8a] hover:scale-110 text-white backdrop-blur flex items-center justify-center transition-all"
         aria-label="Next"
       >
@@ -185,7 +188,7 @@ export default function Hero() {
       </button>
 
       <div className="absolute bottom-[120px] left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {heroSlides.map((_, i) => (
+        {data.heroSlides.map((_, i) => (
           <button
             key={i}
             onClick={() => setIdx(i)}
