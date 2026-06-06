@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
-import { programCategories, programs } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ArrowRight, BookOpen, Search, Filter, X } from "lucide-react";
 import useReveal from "../hooks/useReveal";
 
@@ -15,12 +16,13 @@ const ALL_SCHOOLS = [
 ];
 
 export default function Programmes() {
-  const [active, setActive] = useState("ug");
+  const { data } = useContext(DataContext);
+  const [active, setActive] = useState(data.programCategories?.[0]?.id || "ug");
   const [query, setQuery] = useState("");
   const [school, setSchool] = useState("All Colleges");
   const [headRef, headIn] = useReveal();
 
-  const baseList = useMemo(() => programs[active] || [], [active]);
+  const baseList = useMemo(() => data.programs[active] || [], [active]);
 
   const list = useMemo(() => {
     return baseList.filter((p) => {
@@ -53,20 +55,18 @@ export default function Programmes() {
             <span className="inline-flex items-center gap-2 text-[#1e3a8a] text-xs font-semibold tracking-[0.25em] uppercase">
               <span className="w-8 h-px bg-[#1e3a8a]" /> Academic Programmes
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 max-w-xl leading-tight">
-              Discover your <span className="text-[#1e3a8a] italic">future-ready</span>{" "}
-              programme
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 max-w-xl leading-tight whitespace-pre-line">
+              {data.programmeSection?.heading || "Discover your future-ready programme"}
             </h2>
           </div>
-          <p className="text-gray-600 max-w-md text-[15px] leading-relaxed">
-            Explore programmes across Law, Management, Pharmacy, Ayurveda and Education, approved
-            by BCI, AICTE, PCI, NCISM and NCTE.
+          <p className="text-gray-600 max-w-md text-[15px] leading-relaxed whitespace-pre-line">
+            {data.programmeSection?.subheading || "Explore programmes across Law, Management, Pharmacy, Ayurveda and Education, approved by BCI, AICTE, PCI, NCISM and NCTE."}
           </p>
         </div>
 
         {/* Tabs */}
         <div className="flex flex-wrap gap-2 mb-5 border-b border-gray-200">
-          {programCategories.map((c) => (
+          {data.programCategories.map((c) => (
             <button
               key={c.id}
               onClick={() => {

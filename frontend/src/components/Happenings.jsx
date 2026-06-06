@@ -1,9 +1,11 @@
 import React from "react";
-import { news } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ArrowRight, Calendar } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function Happenings() {
+  const { data } = useContext(DataContext);
   return (
     <section id="news" className="py-16 md:py-24 bg-white relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -27,7 +29,7 @@ export default function Happenings() {
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {news.map((n, i) => (
+          {data.news.map((n, i) => (
             <Reveal key={n.id} delay={i * 120}>
               <a
                 href="#"

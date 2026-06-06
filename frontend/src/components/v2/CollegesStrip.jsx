@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
-import { colleges } from "../../mock";
+import React, { useRef, useContext } from "react";
+import { DataContext } from "../../context/DataContext";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "../Reveal";
 
 export default function CollegesStrip() {
+  const { data } = useContext(DataContext);
   const scroller = useRef(null);
   const scroll = (dir) => {
     const s = scroller.current;
@@ -31,12 +32,10 @@ export default function CollegesStrip() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
               <div className="inline-flex items-center gap-2 text-[#1e3a8a] text-[11px] font-bold tracking-[0.3em] uppercase">
-                <span className="w-8 h-px bg-[#1e3a8a]" /> Our 5 Colleges
+                <span className="w-8 h-px bg-[#1e3a8a]" /> {data.collegeSection?.heading || "Our 5 Colleges"}
               </div>
-              <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#0a1232] leading-tight mt-3 max-w-2xl">
-                Specialist faculties.
-                <br />
-                <span className="italic text-[#1e3a8a]">One campus.</span>
+              <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#0a1232] leading-tight mt-3 max-w-2xl whitespace-pre-line">
+                {data.collegeSection?.subheading || "Specialist faculties.\nOne campus."}
               </h2>
             </div>
             <div className="flex items-center gap-2">
@@ -65,12 +64,12 @@ export default function CollegesStrip() {
           className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 lg:-mx-10 px-6 lg:px-10 scrollbar-thin"
           style={{ scrollbarWidth: "thin" }}
         >
-          {colleges.map((c, i) => (
+          {data.colleges && data.colleges.map((c, i) => (
             <article
-              key={c.id}
+              key={c.id || i}
               className="group snap-start shrink-0 w-[320px] md:w-[380px] bg-white shadow-sm hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
               style={{ animationDelay: `${i * 80}ms` }}
-              data-testid={`v2-college-card-${c.id}`}
+              data-testid={`v2-college-card-${c.id || i}`}
             >
               <div className="relative h-56 overflow-hidden">
                 <img
@@ -100,10 +99,10 @@ export default function CollegesStrip() {
                     {c.programs}
                   </div>
                   <a
-                    href="#programmes"
-                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0a1232] group-hover:text-[#1e3a8a] transition"
+                    href={c.ctaLink || "#programmes"}
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0a1232] group-hover:text-[#1e3a8a] transition uppercase"
                   >
-                    EXPLORE <ArrowRight size={11} />
+                    {c.ctaText || "EXPLORE"} <ArrowRight size={11} />
                   </a>
                 </div>
               </div>

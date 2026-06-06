@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { heroSlides } from "../../mock";
+import React, { useEffect, useState, useContext } from "react";
+import { DataContext } from "../../context/DataContext";
+import axios from "axios";
 import {
   User,
   Phone,
@@ -19,6 +20,7 @@ const HIGHLIGHTS = [
 ];
 
 export default function HeroV2() {
+  const { data } = useContext(DataContext);
   const [idx, setIdx] = useState(0);
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({
@@ -30,19 +32,27 @@ export default function HeroV2() {
   });
 
   useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % heroSlides.length), 6500);
+    if (!data.heroSlides || data.heroSlides.length === 0) return;
+    const t = setInterval(() => setIdx((i) => (i + 1) % data.heroSlides.length), 6500);
     return () => clearInterval(t);
-  }, []);
+  }, [data.heroSlides]);
 
-  const slide = heroSlides[idx];
+  const slide = data.heroSlides && data.heroSlides.length > 0 ? data.heroSlides[idx] : null;
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => {
-      setSent(false);
-      setForm({ name: "", phone: "", email: "", programme: "", college: "" });
-    }, 3500);
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      await axios.post(`${apiUrl}/landing2/leads`, form);
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+        setForm({ name: "", phone: "", email: "", programme: "", college: "" });
+      }, 3500);
+    } catch (err) {
+      console.error("Error submitting lead:", err);
+      alert("Failed to submit enquiry. Please try again.");
+    }
   };
 
   const onChange = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -54,9 +64,9 @@ export default function HeroV2() {
       data-testid="hero-v2"
     >
       {/* background slides */}
-      {heroSlides.map((s, i) => (
+      {data.heroSlides && data.heroSlides.map((s, i) => (
         <div
-          key={s.id}
+          key={s.id || i}
           className={`absolute inset-0 transition-opacity duration-1000 ${
             i === idx ? "opacity-100" : "opacity-0"
           }`}
@@ -106,17 +116,19 @@ export default function HeroV2() {
           </p>
 
           {/* rotating slide tag */}
-          <div
-            key={slide.id}
-            className="mt-7 border-l-2 border-amber-400 pl-4 max-w-md v2-enter-4"
-          >
-            <div className="text-[10px] font-bold tracking-[0.3em] text-amber-400 uppercase">
-              {slide.tag}
+          {slide && (
+            <div
+              key={slide.id || idx}
+              className="mt-7 border-l-2 border-amber-400 pl-4 max-w-md v2-enter-4"
+            >
+              <div className="text-[10px] font-bold tracking-[0.3em] text-amber-400 uppercase">
+                {slide.tag}
+              </div>
+              <div className="text-white font-serif text-base md:text-lg mt-1 leading-snug">
+                {slide.title}
+              </div>
             </div>
-            <div className="text-white font-serif text-base md:text-lg mt-1 leading-snug">
-              {slide.title}
-            </div>
-          </div>
+          )}
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 mt-7 max-w-2xl v2-enter-4">
             {HIGHLIGHTS.map((h) => (
@@ -168,7 +180,7 @@ export default function HeroV2() {
 
           {/* slide dots */}
           <div className="mt-10 flex gap-2">
-            {heroSlides.map((_, i) => (
+            {data.heroSlides && data.heroSlides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setIdx(i)}

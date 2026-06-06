@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { Phone, Mail } from "lucide-react";
 
 export default function TopBar({ scrolled }) {
+  const { data } = useContext(DataContext);
+  const { contactInfo } = data;
   return (
     <div
       className={`hidden lg:flex w-full text-xs py-2 px-6 items-center justify-between transition-colors duration-500 ${
@@ -10,18 +13,18 @@ export default function TopBar({ scrolled }) {
     >
       <div className="flex items-center gap-5">
         <a
-          href="tel:+911204321400"
+          href={`tel:${contactInfo?.admissionNumber || "+91-120-2326600"}`}
           className="flex items-center gap-1.5 hover:text-amber-400 transition-colors"
         >
-          <Phone size={12} /> +91-120-4321400
+          <Phone size={12} /> {contactInfo?.admissionNumber || "+91-120-2326600"}
         </a>
         <a
-          href="mailto:admissions@ishan.ac"
+          href={`mailto:${contactInfo?.email || "admissions@ishan.ac"}`}
           className="flex items-center gap-1.5 hover:text-amber-400 transition-colors"
         >
-          <Mail size={12} /> admissions@ishan.ac
+          <Mail size={12} /> {contactInfo?.email || "admissions@ishan.ac"}
         </a>
-        <span className="text-amber-400/90">Knowledge Park-1, Greater Noida</span>
+        <span className="text-amber-400/90 truncate max-w-[200px] inline-block align-bottom">{contactInfo?.location?.split('\n')[0] || "Greater Noida"}</span>
       </div>
       <div className="flex items-center gap-4">
         <a href="#contact" className="hover:text-amber-400 transition-colors">Anti-Ragging</a>

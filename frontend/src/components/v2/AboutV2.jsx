@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DataContext } from "../../context/DataContext";
 import Reveal from "../Reveal";
 import { Quote } from "lucide-react";
-import { aboutImages, testimonials } from "../../mock";
+import { aboutImages as mockAboutImages, testimonials as mockTestimonials } from "../../mock";
 
 export default function AboutV2() {
+  const { data } = useContext(DataContext);
+  const aboutImages = data.aboutImages?.length >= 2 ? data.aboutImages : mockAboutImages;
+  const testimonial = data.testimonials?.[0] || mockTestimonials[0];
   return (
     <section
       id="about"
@@ -15,12 +19,12 @@ export default function AboutV2() {
           <div className="relative">
             <div className="grid grid-cols-2 gap-3">
               <img
-                src={aboutImages[0]}
+                src={aboutImages[0]?.url || aboutImages[0]}
                 alt=""
                 className="w-full h-64 md:h-80 object-cover"
               />
               <img
-                src={aboutImages[1]}
+                src={aboutImages[1]?.url || aboutImages[1]}
                 alt=""
                 className="w-full h-64 md:h-80 object-cover mt-10"
               />
@@ -42,17 +46,11 @@ export default function AboutV2() {
             <div className="inline-flex items-center gap-2 text-[#1e3a8a] text-[11px] font-bold tracking-[0.3em] uppercase">
               <span className="w-8 h-px bg-[#1e3a8a]" /> About Ishan
             </div>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#0a1232] leading-tight mt-3">
-              Education that
-              <br />
-              <span className="italic text-[#1e3a8a]">outlasts</span> trends.
+            <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#0a1232] leading-tight mt-3 whitespace-pre-line">
+              {data.aboutContent?.title || "Education that\noutlasts trends."}
             </h2>
-            <p className="mt-5 text-gray-600 text-[15px] leading-relaxed">
-              Ishan Educational Institutions was founded in 1994 with a singular
-              purpose: to build an academic group that prepares professionals for the
-              real world. Today, our five colleges, Law, Management & Technology,
-              Pharmacy, Ayurveda and Education, share one Greater Noida campus,
-              200+ faculty, and a network of 50,000+ alumni across the globe.
+            <p className="mt-5 text-gray-600 text-[15px] leading-relaxed whitespace-pre-line">
+              {data.aboutContent?.description || "Ishan Educational Institutions was founded in 1994 with a singular purpose: to build an academic group that prepares professionals for the real world."}
             </p>
 
             <div className="grid grid-cols-3 gap-4 mt-8">
@@ -82,20 +80,20 @@ export default function AboutV2() {
                 className="text-amber-400 absolute -top-3 left-5 bg-white p-1 rounded-sm"
               />
               <p className="text-[14px] text-gray-700 italic leading-relaxed">
-                "{testimonials[0].quote}"
+                "{testimonial.quote}"
               </p>
               <div className="mt-3 flex items-center gap-3">
                 <img
-                  src={testimonials[0].image}
-                  alt={testimonials[0].name}
+                  src={testimonial.image}
+                  alt={testimonial.name}
                   className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
                   <div className="text-[13px] font-bold text-[#0a1232]">
-                    {testimonials[0].name}
+                    {testimonial.name}
                   </div>
                   <div className="text-[11px] text-gray-500">
-                    {testimonials[0].course} · Batch {testimonials[0].batch}
+                    {testimonial.course} · Batch {testimonial.batch}
                   </div>
                 </div>
               </div>

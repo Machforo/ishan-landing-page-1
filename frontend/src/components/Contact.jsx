@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { DataContext } from "../context/DataContext";
 import { Phone, Mail, MapPin, Send, MessageSquare, Clock, User } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function Contact() {
+  const { data } = useContext(DataContext);
+  const { contactInfo } = data;
   const [sent, setSent] = useState(false);
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3500);
-    e.target.reset();
+    const formData = new FormData(e.target);
+    const leadData = Object.fromEntries(formData.entries());
+    
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      await axios.post(`${apiUrl}/landing1/leads`, leadData);
+      setSent(true);
+      setTimeout(() => setSent(false), 3500);
+      e.target.reset();
+    } catch (err) {
+      console.error("Error submitting lead:", err);
+      alert("Failed to submit enquiry. Please try again.");
+    }
   };
 
   return (
@@ -47,10 +61,8 @@ export default function Contact() {
                     <div className="text-[11px] text-amber-300 tracking-widest font-bold uppercase">
                       Campus
                     </div>
-                    <p className="text-sm leading-relaxed mt-1">
-                      Knowledge Park-1, Greater Noida
-                      <br />
-                      Uttar Pradesh 201310, India
+                    <p className="text-sm leading-relaxed mt-1 whitespace-pre-line">
+                      {contactInfo?.location || "Knowledge Park-1, Greater Noida\nUttar Pradesh 201310, India"}
                     </p>
                   </div>
                 </div>
@@ -62,11 +74,8 @@ export default function Contact() {
                     <div className="text-[11px] text-amber-300 tracking-widest font-bold uppercase">
                       Admissions
                     </div>
-                    <a href="tel:+911204321400" className="block text-sm mt-1 hover:text-amber-300">
-                      +91-120-4321400
-                    </a>
-                    <a href="tel:+911204321401" className="block text-sm hover:text-amber-300">
-                      +91-120-4321401
+                    <a href={`tel:${contactInfo?.admissionNumber || "+91-120-2326600"}`} className="block text-sm mt-1 hover:text-amber-300">
+                      {contactInfo?.admissionNumber || "+91-120-2326600"}
                     </a>
                   </div>
                 </div>
@@ -79,16 +88,10 @@ export default function Contact() {
                       Email
                     </div>
                     <a
-                      href="mailto:admissions@ishan.ac"
+                      href={`mailto:${contactInfo?.email || "admissions@ishan.ac"}`}
                       className="block text-sm mt-1 hover:text-amber-300"
                     >
-                      admissions@ishan.ac
-                    </a>
-                    <a
-                      href="mailto:info@ishan.ac"
-                      className="block text-sm hover:text-amber-300"
-                    >
-                      info@ishan.ac
+                      {contactInfo?.email || "admissions@ishan.ac"}
                     </a>
                   </div>
                 </div>
@@ -100,10 +103,8 @@ export default function Contact() {
                     <div className="text-[11px] text-amber-300 tracking-widest font-bold uppercase">
                       Office Hours
                     </div>
-                    <p className="text-sm mt-1 leading-relaxed">
-                      Mon – Sat : 9:00 AM – 6:00 PM
-                      <br />
-                      Sunday : By appointment
+                    <p className="text-sm mt-1 leading-relaxed whitespace-pre-line">
+                      {contactInfo?.officeHours || "Mon – Sat : 9:00 AM – 6:00 PM\nSunday : By appointment"}
                     </p>
                   </div>
                 </div>
@@ -157,6 +158,7 @@ export default function Contact() {
                       </label>
                       <input
                         required
+                        name="name"
                         className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a]/10 transition"
                         placeholder="Your full name"
                       />
@@ -168,6 +170,7 @@ export default function Contact() {
                       <input
                         required
                         type="tel"
+                        name="phone"
                         className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a]/10 transition"
                         placeholder="+91 XXXXX XXXXX"
                       />
@@ -181,6 +184,7 @@ export default function Contact() {
                       <input
                         required
                         type="email"
+                        name="email"
                         className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a]/10 transition"
                         placeholder="you@example.com"
                       />
@@ -190,6 +194,7 @@ export default function Contact() {
                         <MapPin size={12} className="text-[#1e3a8a]" /> City
                       </label>
                       <input
+                        name="city"
                         className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a]/10 transition"
                         placeholder="Your city"
                       />
@@ -201,6 +206,7 @@ export default function Contact() {
                         Program of Interest
                       </label>
                       <select
+                        name="programme"
                         className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] bg-white"
                         defaultValue=""
                       >
@@ -218,6 +224,7 @@ export default function Contact() {
                         College Preference
                       </label>
                       <select
+                        name="college"
                         className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] bg-white"
                         defaultValue=""
                       >
@@ -237,6 +244,7 @@ export default function Contact() {
                       <MessageSquare size={12} className="text-[#1e3a8a]" /> Message
                     </label>
                     <textarea
+                      name="message"
                       rows="3"
                       className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a]/10 transition"
                       placeholder="Any specific question for our admissions team?"

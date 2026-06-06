@@ -1,9 +1,10 @@
-import React from "react";
-import { socialPosts } from "../mock";
+import React, { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { Heart, Instagram } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function SocialWall() {
+  const { data } = useContext(DataContext);
   return (
     <section id="social" className="py-16 md:py-20 bg-[#f5f7fb]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -18,16 +19,16 @@ export default function SocialWall() {
               </h2>
             </div>
             <a
-              href="#"
+              href={data.contactInfo?.instagramLink || "#"}
               className="inline-flex items-center gap-2 bg-[#1e3a8a] text-white px-6 py-2.5 text-sm font-semibold hover:bg-[#152a5e] hover:scale-105 transition-all"
             >
-              <Instagram size={16} /> @gdgoenkauniv
+              <Instagram size={16} /> {data.contactInfo?.instagramHandle || "@ishan_institutions"}
             </a>
           </div>
         </Reveal>
 
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
-          {socialPosts.map((p, i) => (
+          {data.socialPosts.map((p, i) => (
             <a
               key={p.id}
               href="#"
