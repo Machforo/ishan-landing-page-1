@@ -12,7 +12,7 @@ export default function Contact() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const leadData = Object.fromEntries(formData.entries());
-    
+
     try {
       const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       await axios.post(`${apiUrl}/landing1/leads`, leadData);

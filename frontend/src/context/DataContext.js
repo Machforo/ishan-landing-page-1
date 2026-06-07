@@ -14,7 +14,7 @@ export const DataProvider = ({ children }) => {
         const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
         const response = await axios.get(`${apiUrl}/landing1`);
         const backendData = response.data;
-        
+
         // Merge backend data with mock data as fallback
         if (backendData && Object.keys(backendData).length > 0) {
           setData(prev => ({
