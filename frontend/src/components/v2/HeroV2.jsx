@@ -67,9 +67,8 @@ export default function HeroV2() {
       {data.heroSlides && data.heroSlides.map((s, i) => (
         <div
           key={s.id || i}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            i === idx ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${i === idx ? "opacity-100" : "opacity-0"
+            }`}
         >
           <img
             src={s.image}
@@ -184,9 +183,8 @@ export default function HeroV2() {
               <button
                 key={i}
                 onClick={() => setIdx(i)}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === idx ? "w-10 bg-amber-400" : "w-4 bg-white/30 hover:bg-white/60"
-                }`}
+                className={`h-1.5 rounded-full transition-all ${i === idx ? "w-10 bg-amber-400" : "w-4 bg-white/30 hover:bg-white/60"
+                  }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
