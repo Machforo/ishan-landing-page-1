@@ -42,7 +42,7 @@ export default function HeroV2() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
       await axios.post(`${apiUrl}/landing2/leads`, form);
       setSent(true);
       setTimeout(() => {
