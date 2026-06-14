@@ -69,7 +69,7 @@ export default function Navbar() {
     <>
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-[#1e3a8a] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]" : "bg-transparent"
+          scrolled ? "bg-[#1e3a8a] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]" : "bg-[#0a1232]/80 backdrop-blur-md"
         }`}
       >
         <TopBar scrolled={scrolled} />
@@ -91,12 +91,12 @@ export default function Navbar() {
             </a>
 
             <nav
-              className="hidden xl:flex items-center"
+              className="hidden lg:flex items-center"
               onMouseLeave={() => setActiveMenu(null)}
             >
-              {data.navMenu.map((m) => (
+              {data.navMenu.map((m, mi) => (
                 <div
-                  key={m.title}
+                  key={m.title || mi}
                   className="relative"
                   onMouseEnter={() => setActiveMenu(m.title)}
                 >
@@ -175,7 +175,7 @@ export default function Navbar() {
                 </span>
               </a>
               <button
-                className={`xl:hidden p-2 ${darkText ? "text-[#1e3a8a]" : "text-white"}`}
+                className={`lg:hidden p-2 ${darkText ? "text-[#1e3a8a]" : "text-white"}`}
                 onClick={() => setOpen(true)}
                 aria-label="Open menu"
               >
@@ -237,7 +237,7 @@ export default function Navbar() {
                       .find((x) => x.title === activeMenu)
                       ?.items.map((it, i) => (
                         <a
-                          key={it}
+                          key={`${it}-${i}`}
                           href={`#${SECTION_MAP[it] || "top"}`}
                           onClick={(e) => handleNav(e, SECTION_MAP[it] || "top")}
                           className="group flex items-center gap-2 py-2.5 border-b border-gray-100 text-[13px] text-gray-700 hover:text-[#1e3a8a] transition-all"
@@ -281,8 +281,8 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="px-2 py-3">
-              {data.navMenu.map((m) => (
-                <details key={m.title} className="border-b border-gray-100 group">
+              {data.navMenu.map((m, mi) => (
+                <details key={m.title || mi} className="border-b border-gray-100 group">
                   <summary className="flex items-center justify-between px-3 py-3.5 cursor-pointer text-[14px] font-semibold uppercase text-gray-800 list-none group-open:text-[#1e3a8a]">
                     <span className="flex items-center gap-2">
                       <span className="text-base">{menuIcons[m.title]}</span>

@@ -12,7 +12,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 
-const HIGHLIGHTS = [
+const DEFAULT_HIGHLIGHTS = [
   "30+ years of academic legacy",
   "5 colleges • one multi-disciplinary group",
   "500+ recruiters • 98% placement rate",
@@ -31,6 +31,56 @@ export default function HeroV2() {
     college: "",
   });
 
+  const [heroContent, setHeroContent] = useState({
+    badgeText: "Admissions Live · 2026-27",
+    heading: "Where India's",
+    headingEnd: "30 years of legacy.",
+    subtext: "Since 1994, Ishan Educational Institutions has shaped over 50,000 professionals across Law, Management, Pharmacy, Ayurveda & Education. One campus. Five accredited colleges. Limitless careers.",
+    highlights: DEFAULT_HIGHLIGHTS,
+    ctaExploreText: "Explore Programmes",
+    applicationsCount: "2,400+",
+    applicationsLabel: "applications this week",
+    formTagline: "Start Your Journey",
+    formHeading: "Apply in 2 minutes",
+    formSubtext: "Call-back within 2 working hours",
+    formCta: "Get My Call Back",
+    offerText: "Early-bird scholarship up to 50%",
+    offerSubtext: "Limited seats",
+    confidentialityText: "100% confidential · No spam · Unsubscribe anytime"
+  });
+
+  useEffect(() => {
+    const fetchHeroContent = async () => {
+      try {
+        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const response = await axios.get(`${apiUrl}/hero-v2`);
+        if (response.data) {
+          const d = response.data;
+          setHeroContent(prev => ({
+            badgeText: d.badgeText || prev.badgeText,
+            heading: d.heading || prev.heading,
+            headingEnd: d.headingEnd || prev.headingEnd,
+            subtext: d.subtext || prev.subtext,
+            highlights: d.highlights && d.highlights.length > 0 ? d.highlights.map(h => h.text || h) : prev.highlights,
+            ctaExploreText: d.ctaExploreText || prev.ctaExploreText,
+            applicationsCount: d.applicationsCount || prev.applicationsCount,
+            applicationsLabel: d.applicationsLabel || prev.applicationsLabel,
+            formTagline: d.formTagline || prev.formTagline,
+            formHeading: d.formHeading || prev.formHeading,
+            formSubtext: d.formSubtext || prev.formSubtext,
+            formCta: d.formCta || prev.formCta,
+            offerText: d.offerText || prev.offerText,
+            offerSubtext: d.offerSubtext || prev.offerSubtext,
+            confidentialityText: d.confidentialityText || prev.confidentialityText
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching hero v2 content:", error);
+      }
+    };
+    fetchHeroContent();
+  }, []);
+
   useEffect(() => {
     if (!data.heroSlides || data.heroSlides.length === 0) return;
     const t = setInterval(() => setIdx((i) => (i + 1) % data.heroSlides.length), 6500);
@@ -42,7 +92,7 @@ export default function HeroV2() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
+      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       await axios.post(`${apiUrl}/landing2/leads`, form);
       setSent(true);
       setTimeout(() => {
@@ -97,21 +147,19 @@ export default function HeroV2() {
           <div
             className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-amber-400/50 bg-amber-400/10 backdrop-blur-sm text-[11px] tracking-[0.3em] uppercase text-amber-300 font-semibold v2-enter-1"
           >
-            <Sparkles size={12} /> Admissions Live · 2026-27
+            <Sparkles size={12} /> {heroContent.badgeText}
           </div>
 
           <h1 className="font-serif font-bold leading-[1.02] text-[28px] md:text-[36px] lg:text-[44px] mt-5 v2-enter-2">
-            Where India's
+            {heroContent.heading}
             <br />
             <span className="text-amber-400 italic">ambition</span> meets
             <br />
-            30 years of legacy.
+            {heroContent.headingEnd}
           </h1>
 
-          <p className="mt-5 text-gray-200/90 text-[15px] md:text-base max-w-xl leading-relaxed v2-enter-3">
-            Since 1994, Ishan Educational Institutions has shaped over 50,000
-            professionals across Law, Management, Pharmacy, Ayurveda & Education.
-            One campus. Five accredited colleges. Limitless careers.
+          <p className="mt-5 text-gray-200/90 text-[15px] md:text-base max-w-xl leading-relaxed v2-enter-3 whitespace-pre-line">
+            {heroContent.subtext}
           </p>
 
           {/* rotating slide tag */}
@@ -130,9 +178,9 @@ export default function HeroV2() {
           )}
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 mt-7 max-w-2xl v2-enter-4">
-            {HIGHLIGHTS.map((h) => (
+            {heroContent.highlights.map((h, i) => (
               <li
-                key={h}
+                key={i}
                 className="flex items-start gap-2.5 text-[13px] text-gray-100/90"
               >
                 <CheckCircle2 size={15} className="text-amber-400 shrink-0 mt-0.5" />
@@ -155,7 +203,7 @@ export default function HeroV2() {
               className="group inline-flex items-center gap-2 bg-white text-[#0a1232] font-bold px-6 py-3 text-[13px] uppercase tracking-wider hover:bg-amber-400 transition-colors"
               data-testid="hero-v2-explore-programmes"
             >
-              Explore Programmes
+              {heroContent.ctaExploreText}
               <ChevronRight
                 size={16}
                 className="group-hover:translate-x-1 transition-transform"
@@ -172,7 +220,7 @@ export default function HeroV2() {
                 ))}
               </div>
               <span className="leading-tight">
-                <b className="text-amber-400">2,400+</b> applications this week
+                <b className="text-amber-400">{heroContent.applicationsCount}</b> {heroContent.applicationsLabel}
               </span>
             </div>
           </div>
@@ -292,19 +340,19 @@ export default function HeroV2() {
                     data-testid="v2-form-submit"
                   >
                     <span className="relative z-10 inline-flex items-center justify-center gap-2">
-                      Get My Call Back
+                      {heroContent.formCta}
                       <ChevronRight size={14} />
                     </span>
                     <span className="absolute inset-0 bg-amber-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
                     <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 text-[#0a1232] transition">
-                      Get My Call Back
+                      {heroContent.formCta}
                       <ChevronRight size={14} />
                     </span>
                   </button>
 
                   <div className="flex items-center gap-2 text-[11px] text-gray-500 pt-1">
                     <BadgeCheck size={13} className="text-[#1e3a8a]" />
-                    100% confidential · No spam · Unsubscribe anytime
+                    {heroContent.confidentialityText}
                   </div>
                 </form>
               )}
@@ -313,10 +361,10 @@ export default function HeroV2() {
             {/* little offer strip */}
             <div className="mt-3 bg-amber-400 text-[#0a1232] px-4 py-2.5 text-[12px] font-semibold flex items-center justify-between rounded-sm">
               <span className="flex items-center gap-2">
-                <Sparkles size={13} /> Early-bird scholarship up to 50%
+                <Sparkles size={13} /> {heroContent.offerText}
               </span>
               <span className="text-[10px] tracking-[0.18em] uppercase opacity-80">
-                Limited seats
+                {heroContent.offerSubtext}
               </span>
             </div>
           </div>

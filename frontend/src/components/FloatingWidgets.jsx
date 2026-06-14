@@ -12,7 +12,7 @@ export default function FloatingWidgets() {
     const leadData = Object.fromEntries(formData.entries());
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
+      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       await axios.post(`${apiUrl}/landing1/leads`, leadData);
       setSent(true);
       setTimeout(() => {

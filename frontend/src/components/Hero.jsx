@@ -8,7 +8,10 @@ export default function Hero() {
   const { data } = useContext(DataContext);
   const [idx, setIdx] = useState(0);
   const [query, setQuery] = useState("");
-  const [level, setLevel] = useState("Undergraduate");
+  const levels = data.programCategories?.length
+    ? data.programCategories.map((c) => c.label || c.id || c)
+    : ["Undergraduate", "Postgraduate", "Diploma", "Doctoral"];
+  const [level, setLevel] = useState(levels[0]);
 
   useEffect(() => {
     const t = setInterval(() => setIdx((i) => (i + 1) % data.heroSlides.length), 6500);
@@ -51,7 +54,7 @@ export default function Hero() {
       <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 lg:px-10 flex flex-col justify-center pt-24 pb-28 text-white">
         <div className="inline-flex items-center gap-2 text-white/80 text-[11px] tracking-[0.35em] uppercase mb-4 slide-enter-1">
           <span className="w-8 h-px bg-amber-400" />
-          Admissions 2026-27
+          {data.highlights?.[0]?.text || data.newsFlash?.[0]?.title || "Admissions 2026-27"}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 items-center">
           <div key={slide.id} className="max-w-2xl">
@@ -77,7 +80,7 @@ export default function Hero() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </div>  
             )}
 
             {slide.programs && (
@@ -107,13 +110,17 @@ export default function Hero() {
             )}
 
             <div className="flex items-center gap-4 slide-enter-5">
-              <button
-                onClick={() => scrollToId("contact")}
+              <a
+                href={slide.ctaLink || "#contact"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId(slide.ctaLink?.replace("#", "") || "contact");
+                }}
                 className="relative inline-flex items-center gap-2 bg-amber-500 text-[#0a1232] font-bold px-6 py-3 text-sm uppercase tracking-wider shadow-xl overflow-hidden group"
               >
-                <span className="relative z-10">Apply Now</span>
+                <span className="relative z-10">{slide.ctaText || "Apply Now"}</span>
                 <span className="absolute inset-0 bg-amber-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
-              </button>
+              </a>
             </div>
           </div>
 
@@ -137,11 +144,11 @@ export default function Hero() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") scrollToId("programmes");
               }}
-              placeholder="Find Programmes"
+              placeholder={data.programmeSection?.searchPlaceholder || "Find Programmes"}
               className="flex-1 py-3 text-sm text-gray-800 outline-none placeholder:text-gray-400"
             />
             <div className="hidden md:flex items-center gap-4 px-3 text-[12px] font-semibold text-gray-700">
-              {["Undergraduate", "Postgraduate", "Diploma", "Doctoral"].map((l) => (
+              {levels.map((l) => (
                 <button
                   key={l}
                   onClick={() => {
@@ -160,13 +167,13 @@ export default function Hero() {
               onClick={() => scrollToId("contact")}
               className="bg-[#1e3a8a] hover:bg-[#152a5e] text-white font-bold px-6 py-3 text-xs uppercase tracking-wider transition"
             >
-              Apply Now
+              {data.programmeSection?.ctaApply || "Apply Now"}
             </button>
             <button
               onClick={() => scrollToId("programmes")}
               className="bg-amber-500 hover:bg-amber-400 text-[#0a1232] font-bold px-6 py-3 text-xs uppercase tracking-wider transition"
             >
-              View All
+              {data.programmeSection?.ctaViewAll || "View All"}
             </button>
           </div>
         </div>

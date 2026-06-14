@@ -1,12 +1,49 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { ArrowRight, Quote, Building2 } from "lucide-react";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
+import axios from "axios";
 
 export default function Placements() {
   const { data } = useContext(DataContext);
+  const [placementData, setPlacementData] = useState({
+    image: data.placementSection?.image || "https://images.pexels.com/photos/31040302/pexels-photo-31040302.jpeg?w=900",
+    badgeNum: data.placementSection?.badgeNum || "100%",
+    badgeText: data.placementSection?.badgeText || "Placement Assistance",
+    heading: data.placementSection?.heading || "Placement Support at",
+    highlight: data.placementSection?.highlight || "Ishan Educational Institutions",
+    description: data.placementSection?.description || "Our dedicated career advisory and placement team provides comprehensive career counselling to identify the unique and distinctive goals of each student.",
+    ctaText: data.placementSection?.ctaText || "Placement Process",
+    ctaLink: data.placementSection?.ctaLink || "#",
+    recruitersHeading: data.placementSection?.recruitersHeading || "Our Top Recruiters"
+  });
+
+  useEffect(() => {
+    const fetchPlacementData = async () => {
+      try {
+        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const response = await axios.get(`${apiUrl}/placement-head-v2`);
+        if (response.data) {
+          setPlacementData(prev => ({
+            image: response.data.image || prev.image,
+            badgeNum: response.data.badgeNum || prev.badgeNum,
+            badgeText: response.data.badgeText || prev.badgeText,
+            heading: response.data.heading || prev.heading,
+            highlight: response.data.highlight || prev.highlight,
+            description: response.data.description || prev.description,
+            ctaText: response.data.ctaText || prev.ctaText,
+            ctaLink: response.data.ctaLink || prev.ctaLink,
+            recruitersHeading: response.data.recruitersHeading || prev.recruitersHeading
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching placement data v2:", error);
+      }
+    };
+    fetchPlacementData();
+  }, []);
+
   return (
     <section id="placements" className="py-16 md:py-24 bg-gradient-to-b from-[#f5f7fb] to-white relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative">
@@ -14,14 +51,14 @@ export default function Placements() {
           <Reveal direction="left">
             <div className="relative group">
               <img
-                src="https://images.pexels.com/photos/31040302/pexels-photo-31040302.jpeg?w=900"
+                src={placementData.image}
                 alt="Placements"
                 className="w-full h-[440px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1e3a8a]/30 to-transparent" />
               <div className="absolute -bottom-6 -right-6 bg-[#1e3a8a] text-white p-6 hidden md:block shadow-xl">
-                <div className="text-5xl font-serif font-bold text-amber-400">100%</div>
-                <div className="text-xs uppercase tracking-wider mt-1">Placement Assistance</div>
+                <div className="text-5xl font-serif font-bold text-amber-400">{placementData.badgeNum}</div>
+                <div className="text-xs uppercase tracking-wider mt-1">{placementData.badgeText}</div>
               </div>
               <div className="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-2">
                 <div className="text-xs font-semibold text-[#1e3a8a] tracking-widest">LIVE</div>
@@ -34,19 +71,18 @@ export default function Placements() {
               <span className="w-8 h-px bg-[#1e3a8a]" /> Campus Placements
             </span>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 leading-tight">
-              Placement Support at <br />
-              <span className="italic text-[#1e3a8a]">Ishan Educational Institutions</span>
+              {placementData.heading} <br />
+              <span className="italic text-[#1e3a8a]">{placementData.highlight}</span>
             </h2>
-            <p className="mt-5 text-gray-600 leading-relaxed text-[15px]">
-              Our dedicated career advisory and placement team provides comprehensive career
-              counselling to identify the unique and distinctive goals of each student.
+            <p className="mt-5 text-gray-600 leading-relaxed text-[15px] whitespace-pre-line">
+              {placementData.description}
             </p>
 
             <a
-              href="#"
+              href={placementData.ctaLink}
               className="inline-flex items-center gap-2 mt-6 text-[#1e3a8a] font-semibold border-b-2 border-[#1e3a8a] pb-1 hover:gap-3 transition-all"
             >
-              Placement Process <ArrowRight size={16} />
+              {placementData.ctaText} <ArrowRight size={16} />
             </a>
 
             <div className="grid grid-cols-2 gap-5 mt-8">
@@ -71,7 +107,7 @@ export default function Placements() {
         <div className="mt-20">
           <Reveal>
             <h3 className="text-center font-serif text-2xl font-semibold text-gray-800 mb-8">
-              Our Top Recruiters
+              {placementData.recruitersHeading}
             </h3>
           </Reveal>
           <div className="overflow-hidden relative">

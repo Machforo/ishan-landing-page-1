@@ -24,8 +24,7 @@ export default function Colleges() {
               </h2>
             </div>
             <p className="text-gray-600 max-w-md text-[15px] leading-relaxed">
-              Across Law, Management, Pharmacy, Ayurveda and Education, choose your calling from
-              the Ishan ecosystem, all approved by respective national regulators.
+              {data.collegeSection?.description || "Across Law, Management, Pharmacy, Ayurveda and Education, choose your calling from the Ishan ecosystem, all approved by respective national regulators."}
             </p>
           </div>
         </Reveal>
