@@ -94,9 +94,9 @@ export default function Navbar() {
               className="hidden xl:flex items-center"
               onMouseLeave={() => setActiveMenu(null)}
             >
-              {data.navMenu.map((m) => (
+              {(data?.navMenu || []).map((m, idx) => (
                 <div
-                  key={m.title}
+                  key={m.title || idx}
                   className="relative"
                   onMouseEnter={() => setActiveMenu(m.title)}
                 >
@@ -233,11 +233,10 @@ export default function Navbar() {
                     </a>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-1">
-                    {data.navMenu
-                      .find((x) => x.title === activeMenu)
-                      ?.items.map((it, i) => (
+                    {((data?.navMenu || []).find((x) => x.title === activeMenu)?.items || [])
+                      .map((it, i) => (
                         <a
-                          key={it}
+                          key={`${it}-${i}`}
                           href={`#${SECTION_MAP[it] || "top"}`}
                           onClick={(e) => handleNav(e, SECTION_MAP[it] || "top")}
                           className="group flex items-center gap-2 py-2.5 border-b border-gray-100 text-[13px] text-gray-700 hover:text-[#1e3a8a] transition-all"
@@ -281,8 +280,8 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="px-2 py-3">
-              {data.navMenu.map((m) => (
-                <details key={m.title} className="border-b border-gray-100 group">
+              {(data?.navMenu || []).map((m, idx) => (
+                <details key={m.title || idx} className="border-b border-gray-100 group">
                   <summary className="flex items-center justify-between px-3 py-3.5 cursor-pointer text-[14px] font-semibold uppercase text-gray-800 list-none group-open:text-[#1e3a8a]">
                     <span className="flex items-center gap-2">
                       <span className="text-base">{menuIcons[m.title]}</span>
@@ -291,9 +290,9 @@ export default function Navbar() {
                     <ChevronDown size={16} className="group-open:rotate-180 transition" />
                   </summary>
                   <div className="pl-6 pb-2 bg-gray-50">
-                    {m.items.map((it) => (
+                    {(m.items || []).map((it, sIdx) => (
                       <a
-                        key={it}
+                        key={`${it}-${sIdx}`}
                         href={`#${SECTION_MAP[it] || "top"}`}
                         onClick={(e) => handleNav(e, SECTION_MAP[it] || "top")}
                         className="block py-2 text-[13px] text-gray-600 hover:text-[#1e3a8a]"

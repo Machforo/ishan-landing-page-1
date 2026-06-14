@@ -1,8 +1,8 @@
-import React, { useState, useMemo } from "react";
-import { useContext } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { ArrowRight, BookOpen, Search, Filter, X } from "lucide-react";
 import useReveal from "../hooks/useReveal";
+import axios from "axios";
 
 const ALL_SCHOOLS = [
   "All Colleges",
@@ -22,7 +22,36 @@ export default function Programmes() {
   const [school, setSchool] = useState("All Colleges");
   const [headRef, headIn] = useReveal();
 
-  const baseList = useMemo(() => data.programs[active] || [], [active]);
+  const [progHeadData, setProgHeadData] = useState({
+    heading: data.programmeSection?.heading || "Discover your future-ready programme",
+    subheading: data.programmeSection?.subheading || "Explore programmes across Law, Management, Pharmacy, Ayurveda and Education, approved by BCI, AICTE, PCI, NCISM and NCTE.",
+    searchPlaceholder: data.programmeSection?.searchPlaceholder || "Search programmes (e.g. LL.B, MBA, Pharmacy)...",
+    ctaApply: data.programmeSection?.ctaApply || "Apply Now",
+    ctaViewAll: data.programmeSection?.ctaViewAll || "View Colleges"
+  });
+
+  useEffect(() => {
+    const fetchProgHeadData = async () => {
+      try {
+        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const response = await axios.get(`${apiUrl}/programme-head`);
+        if (response.data) {
+          setProgHeadData(prev => ({
+            heading: response.data.heading || prev.heading,
+            subheading: response.data.subheading || prev.subheading,
+            searchPlaceholder: response.data.searchPlaceholder || prev.searchPlaceholder,
+            ctaApply: response.data.ctaApply || prev.ctaApply,
+            ctaViewAll: response.data.ctaViewAll || prev.ctaViewAll
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching programme head data:", error);
+      }
+    };
+    fetchProgHeadData();
+  }, []);
+
+  const baseList = useMemo(() => data.programs[active] || [], [active, data.programs]);
 
   const list = useMemo(() => {
     return baseList.filter((p) => {
@@ -56,11 +85,11 @@ export default function Programmes() {
               <span className="w-8 h-px bg-[#1e3a8a]" /> Academic Programmes
             </span>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 max-w-xl leading-tight whitespace-pre-line">
-              {data.programmeSection?.heading || "Discover your future-ready programme"}
+              {progHeadData.heading}
             </h2>
           </div>
           <p className="text-gray-600 max-w-md text-[15px] leading-relaxed whitespace-pre-line">
-            {data.programmeSection?.subheading || "Explore programmes across Law, Management, Pharmacy, Ayurveda and Education, approved by BCI, AICTE, PCI, NCISM and NCTE."}
+            {progHeadData.subheading}
           </p>
         </div>
 
@@ -97,7 +126,7 @@ export default function Programmes() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search programmes (e.g. LL.B, MBA, Pharmacy)..."
+              placeholder={progHeadData.searchPlaceholder}
               className="w-full pl-10 pr-10 py-2.5 bg-white border border-gray-200 text-sm focus:outline-none focus:border-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a]/10 transition"
             />
             {query && (
@@ -184,17 +213,17 @@ export default function Programmes() {
             href="#contact"
             className="relative inline-flex items-center bg-[#1e3a8a] text-white font-semibold px-7 py-3 text-sm uppercase tracking-wider shadow overflow-hidden group"
           >
-            <span className="relative z-10">Apply Now</span>
+            <span className="relative z-10">{progHeadData.ctaApply}</span>
             <span className="absolute inset-0 bg-amber-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             <span className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-[#0a1232]">
-              Apply Now
+              {progHeadData.ctaApply}
             </span>
           </a>
           <a
             href="#colleges"
             className="inline-flex items-center border-2 border-[#1e3a8a] text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white font-semibold px-7 py-3 text-sm uppercase tracking-wider transition"
           >
-            View Colleges
+            {progHeadData.ctaViewAll}
           </a>
         </div>
       </div>

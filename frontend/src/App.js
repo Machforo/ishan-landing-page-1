@@ -15,6 +15,8 @@ import Footer from "./components/Footer";
 import FloatingWidgets from "./components/FloatingWidgets";
 import "./App.css";
 
+import { Toaster } from "./components/ui/sonner";
+
 function App() {
   return (
     <div className="App bg-white">
@@ -26,12 +28,13 @@ function App() {
       <About />
       <CampusLife />
       <Research />
-      <Placements />
+      <Placements />   {/*  Coming from fro */}
       <Happenings />
       <SocialWall />
       <Contact />
       <Footer />
       <FloatingWidgets />
+      <Toaster />
     </div>
   );
 }

@@ -38,9 +38,33 @@ const scrollToId = (e, id) => {
 
 export default function Footer() {
   const { data } = useContext(DataContext);
-  const about = data.navMenu[0];
-  const admissions = data.navMenu[2];
+  const about = data?.navMenu?.[0] || { items: [] };
+  const admissions = data?.navMenu?.[2] || { items: [] };
   const pick = (label, fallback) => FOOTER_MAP[label] || fallback || "top";
+
+  const quickLinks = data?.footerLinks?.quickLinks || [];
+  const rankings = data?.footerLinks?.rankings || [];
+  const groupLinks = data?.footerLinks?.group || [];
+
+  const getColumnData = (labelField, arrayItems, defaultHeader) => {
+    if (labelField && labelField.includes('\n')) {
+      const items = labelField.split('\n').map(s => s.trim()).filter(Boolean);
+      return {
+        header: defaultHeader,
+        items: items
+      };
+    }
+    return {
+      header: labelField || defaultHeader,
+      items: arrayItems || []
+    };
+  };
+
+  const aboutCol = getColumnData(data?.footerLabels?.about, about.items, "About Ishan");
+  const admissionsCol = getColumnData(data?.footerLabels?.admissions, admissions.items, "Admissions");
+  const quickLinksCol = getColumnData(data?.footerLabels?.quickLinks, quickLinks, "Quick Links");
+  const rankingsCol = getColumnData(data?.footerLabels?.approvals, rankings, "Approvals & Rankings");
+  const groupLinksCol = getColumnData(data?.footerLabels?.group, groupLinks, "Ishan Group");
 
   return (
     <footer className="bg-[#0a1232] text-gray-300">
@@ -48,28 +72,27 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-1">
             <div className="flex items-center mb-5">
-              <img src={data.ISHAN_LOGO} alt="Ishan" className="h-14 w-auto" />
+              <img src={data?.ISHAN_LOGO} alt="Ishan" className="h-14 w-auto" />
             </div>
             <p className="text-sm leading-relaxed text-gray-400 mb-5">
-              The first multidisciplinary institution of Greater Noida, five colleges, one
-              legacy.
+              {data?.aboutContent?.title || "The first multidisciplinary institution of Greater Noida, five colleges, one legacy."}
             </p>
             <div className="space-y-2 text-sm">
               <div className="flex items-start gap-2">
                 <MapPin size={14} className="text-amber-400 mt-1 shrink-0" />
-                <span>Knowledge Park, 1, Greater Noida, Uttar Pradesh 201310</span>
+                <span>{data?.contactInfo?.location || ""}</span>
               </div>
               <a
-                href="tel:+911204321400"
+                href={`tel:${data?.contactInfo?.admissionNumber || ""}`}
                 className="flex items-center gap-2 hover:text-amber-400 transition"
               >
-                <Phone size={14} className="text-amber-400" /> +91, 120, 4321400
+                <Phone size={14} className="text-amber-400" /> {data?.contactInfo?.admissionNumber || ""}
               </a>
               <a
-                href="mailto:admissions@ishan.ac"
+                href={`mailto:${data?.contactInfo?.email || ""}`}
                 className="flex items-center gap-2 hover:text-amber-400 transition"
               >
-                <Mail size={14} className="text-amber-400" /> admissions@ishan.ac
+                <Mail size={14} className="text-amber-400" /> {data?.contactInfo?.email || ""}
               </a>
             </div>
             <div className="flex gap-3 mt-5">
@@ -87,13 +110,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-serif font-bold mb-4">About Ishan</h4>
+            <h4 className="text-white font-serif font-bold mb-4">{aboutCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {about.items.map((i) => (
-                <li key={i}>
+              {aboutCol.items.map((i, idx) => (
+                <li key={i || idx}>
                   <a
-                    href="#about"
-                    onClick={(e) => scrollToId(e, "about")}
+                    href={`#${pick(i, "about")}`}
+                    onClick={(e) => scrollToId(e, pick(i, "about"))}
                     className="hover:text-amber-400 transition"
                   >
                     {i}
@@ -104,13 +127,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-serif font-bold mb-4">Admissions</h4>
+            <h4 className="text-white font-serif font-bold mb-4">{admissionsCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {admissions.items.map((i) => (
-                <li key={i}>
+              {admissionsCol.items.map((i, idx) => (
+                <li key={i || idx}>
                   <a
-                    href="#programmes"
-                    onClick={(e) => scrollToId(e, "programmes")}
+                    href={`#${pick(i, "programmes")}`}
+                    onClick={(e) => scrollToId(e, pick(i, "programmes"))}
                     className="hover:text-amber-400 transition"
                   >
                     {i}
@@ -121,10 +144,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-serif font-bold mb-4">Quick Links</h4>
+            <h4 className="text-white font-serif font-bold mb-4">{quickLinksCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {data.footerLinks.quickLinks.map((i) => (
-                <li key={i}>
+              {quickLinksCol.items.map((i, idx) => (
+                <li key={i || idx}>
                   <a
                     href={`#${pick(i, "contact")}`}
                     onClick={(e) => scrollToId(e, pick(i, "contact"))}
@@ -138,10 +161,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-serif font-bold mb-4">Approvals</h4>
+            <h4 className="text-white font-serif font-bold mb-4">{rankingsCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {data.footerLinks.rankings.map((i) => (
-                <li key={i}>
+              {rankingsCol.items.map((i, idx) => (
+                <li key={i || idx}>
                   <a
                     href={`#${pick(i, "about")}`}
                     onClick={(e) => scrollToId(e, pick(i, "about"))}
@@ -152,10 +175,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <h4 className="text-white font-serif font-bold mb-3 mt-6">Ishan Group</h4>
+            <h4 className="text-white font-serif font-bold mb-3 mt-6">{groupLinksCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {data.footerLinks.group.map((i) => (
-                <li key={i}>
+              {groupLinksCol.items.map((i, idx) => (
+                <li key={i || idx}>
                   <a
                     href={`#${pick(i, "about")}`}
                     onClick={(e) => scrollToId(e, pick(i, "about"))}
@@ -172,7 +195,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-gray-400">
           <p>
-            © {new Date().getFullYear()} Ishan Educational Institutions. All rights reserved.
+            {data.footerLabels?.copyright || ""}
           </p>
           <div className="flex gap-5">
             <a
@@ -180,21 +203,21 @@ export default function Footer() {
               onClick={(e) => scrollToId(e, "contact")}
               className="hover:text-amber-400 transition"
             >
-              Privacy Policy
+              {data.footerLabels?.privacy || ""}
             </a>
             <a
               href="#contact"
               onClick={(e) => scrollToId(e, "contact")}
               className="hover:text-amber-400 transition"
             >
-              Terms of Use
+              {data.footerLabels?.terms || ""}
             </a>
             <a
               href="#top"
               onClick={(e) => scrollToId(e, "top")}
               className="hover:text-amber-400 transition"
             >
-              Sitemap
+              {data.footerLabels?.sitemap || ""}
             </a>
           </div>
         </div>

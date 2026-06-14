@@ -1,11 +1,34 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { ArrowRight, GraduationCap, ShieldCheck } from "lucide-react";
 import Reveal from "./Reveal";
+import axios from "axios";
 
 export default function Colleges() {
   const { data } = useContext(DataContext);
+  const [headData, setHeadData] = useState({
+    heading: "Five colleges. One unified legacy of excellence.",
+    text: data.collegeSection?.description || "Across Law, Management, Pharmacy, Ayurveda and Education, choose your calling from the Ishan ecosystem, all approved by respective national regulators."
+  });
+
+  useEffect(() => {
+    const fetchHeadData = async () => {
+      try {
+        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const response = await axios.get(`${apiUrl}/college-head`);
+        if (response.data) {
+          setHeadData({
+            heading: response.data.heading || headData.heading,
+            text: response.data.text || headData.text
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching college head data:", error);
+      }
+    };
+    fetchHeadData();
+  }, []);
+
   return (
     <section id="colleges" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{
@@ -19,13 +42,11 @@ export default function Colleges() {
               <span className="inline-flex items-center gap-2 text-[#1e3a8a] text-xs font-semibold tracking-[0.25em] uppercase">
                 <span className="w-8 h-px bg-[#1e3a8a]" /> Our 5 Colleges
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 leading-tight max-w-2xl">
-                Five colleges. One <span className="italic text-[#1e3a8a]">unified legacy</span> of excellence.
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mt-3 leading-tight max-w-2xl" dangerouslySetInnerHTML={{ __html: headData.heading.replace('unified legacy', '<span class="italic text-[#1e3a8a]">unified legacy</span>') }}>
               </h2>
             </div>
-            <p className="text-gray-600 max-w-md text-[15px] leading-relaxed">
-              Across Law, Management, Pharmacy, Ayurveda and Education, choose your calling from
-              the Ishan ecosystem, all approved by respective national regulators.
+            <p className="text-gray-600 max-w-md text-[15px] leading-relaxed whitespace-pre-line">
+              {headData.text}
             </p>
           </div>
         </Reveal>

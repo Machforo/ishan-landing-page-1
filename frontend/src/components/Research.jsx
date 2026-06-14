@@ -31,7 +31,7 @@ export default function Research() {
             href="#"
             className="inline-flex items-center gap-2 mt-6 text-[#1e3a8a] font-semibold border-b-2 border-[#1e3a8a] pb-1 hover:gap-3 transition-all"
           >
-            Explore Research <ArrowRight size={16} />
+            {data.researchSection?.ctaText|| "Explore Research"} <ArrowRight size={16} />
           </a>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
             {data.researchLinks.map((l, i) => (

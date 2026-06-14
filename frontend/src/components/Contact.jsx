@@ -4,6 +4,8 @@ import { DataContext } from "../context/DataContext";
 import { Phone, Mail, MapPin, Send, MessageSquare, Clock, User } from "lucide-react";
 import Reveal from "./Reveal";
 
+import { toast } from "sonner";
+
 export default function Contact() {
   const { data } = useContext(DataContext);
   const { contactInfo } = data;
@@ -14,14 +16,15 @@ export default function Contact() {
     const leadData = Object.fromEntries(formData.entries());
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
+      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       await axios.post(`${apiUrl}/landing1/leads`, leadData);
       setSent(true);
+      toast.success("Enquiry submitted successfully! Our counsellor will call you back.");
       setTimeout(() => setSent(false), 3500);
       e.target.reset();
     } catch (err) {
       console.error("Error submitting lead:", err);
-      alert("Failed to submit enquiry. Please try again.");
+      toast.error("Failed to submit enquiry. Please try again.");
     }
   };
 
