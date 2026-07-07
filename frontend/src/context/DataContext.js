@@ -78,7 +78,7 @@ export const DataProvider = ({ children }) => {
             socialPosts: backendData.socialPosts || [],
             navMenu: backendData.navMenu?.map(m => ({
               title: m.title || m,
-              items: m.items?.map(i => i.name || i.text || i) || []
+              items: m.items?.map(i => typeof i === 'string' ? { name: i } : { name: i.name || i.text || '', url: i.url || i.link || '' }) || []
             })) || [{ items: [] }, { items: [] }, { items: [] }],
             footerLinks: backendData.footerLinks ? {
               quickLinks: backendData.footerLinks.quickLinks?.map(l => l.text || l) || [],

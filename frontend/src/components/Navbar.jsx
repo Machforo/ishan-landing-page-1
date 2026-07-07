@@ -67,9 +67,13 @@ export default function Navbar() {
     
     if (location.pathname !== "/") {
       navigate("/");
-      setTimeout(() => scrollTo(target), 100);
+      setTimeout(() => {
+        scrollTo(target);
+        window.history.pushState(null, '', '/#' + target);
+      }, 100);
     } else {
       scrollTo(target);
+      window.history.pushState(null, '', '#' + target);
     }
   };
 
