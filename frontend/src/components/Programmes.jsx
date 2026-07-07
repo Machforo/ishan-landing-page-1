@@ -22,7 +22,7 @@ export default function Programmes() {
   const [school, setSchool] = useState("All Colleges");
   const [headRef, headIn] = useReveal();
 
-  const baseList = useMemo(() => data.programs[active] || [], [active]);
+  const baseList = useMemo(() => data.programs[active] || [], [active, data.programs]);
 
   const list = useMemo(() => {
     return baseList.filter((p) => {
