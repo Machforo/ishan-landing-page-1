@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
@@ -13,11 +14,12 @@ import SocialWall from "./components/SocialWall";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import FloatingWidgets from "./components/FloatingWidgets";
+import DynamicPageRenderer from "./components/DynamicPageRenderer";
 import "./App.css";
 
 import { Toaster } from "./components/ui/sonner";
 
-function App() {
+function Home() {
   return (
     <div className="App bg-white">
       <Navbar />
@@ -36,6 +38,17 @@ function App() {
       <FloatingWidgets />
       <Toaster />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/p/:slug" element={<DynamicPageRenderer portal="landing1" />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

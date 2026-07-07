@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, Search, ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
@@ -56,11 +57,20 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleNav = (e, target) => {
     e.preventDefault();
     setActiveMenu(null);
     setOpen(false);
-    scrollTo(target);
+    
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => scrollTo(target), 100);
+    } else {
+      scrollTo(target);
+    }
   };
 
   const darkText = false;
@@ -236,15 +246,17 @@ export default function Navbar() {
                     {((data?.navMenu || []).find((x) => x.title === activeMenu)?.items || [])
                       .map((it, i) => (
                         <a
-                          key={`${it}-${i}`}
-                          href={`#${SECTION_MAP[it] || "top"}`}
-                          onClick={(e) => handleNav(e, SECTION_MAP[it] || "top")}
+                          key={`${it.name || it}-${i}`}
+                          href={it.url ? it.url : `#${SECTION_MAP[it.name || it] || "top"}`}
+                          onClick={(e) => {
+                            if (!it.url) handleNav(e, SECTION_MAP[it.name || it] || "top");
+                          }}
                           className="group flex items-center gap-2 py-2.5 border-b border-gray-100 text-[13px] text-gray-700 hover:text-[#1e3a8a] transition-all"
                           style={{ animation: `itemFade 0.35s ease-out ${i * 0.03}s both` }}
                         >
                           <span className="w-1 h-1 rounded-full bg-[#1e3a8a] opacity-0 group-hover:opacity-100 transition" />
                           <span className="flex-1 group-hover:translate-x-1 transition-transform">
-                            {it}
+                            {it.name || it}
                           </span>
                           <ArrowRight
                             size={12}
@@ -292,12 +304,14 @@ export default function Navbar() {
                   <div className="pl-6 pb-2 bg-gray-50">
                     {(m.items || []).map((it, sIdx) => (
                       <a
-                        key={`${it}-${sIdx}`}
-                        href={`#${SECTION_MAP[it] || "top"}`}
-                        onClick={(e) => handleNav(e, SECTION_MAP[it] || "top")}
+                        key={`${it.name || it}-${sIdx}`}
+                        href={it.url ? it.url : `#${SECTION_MAP[it.name || it] || "top"}`}
+                        onClick={(e) => {
+                          if (!it.url) handleNav(e, SECTION_MAP[it.name || it] || "top");
+                        }}
                         className="block py-2 text-[13px] text-gray-600 hover:text-[#1e3a8a]"
                       >
-                        {it}
+                        {it.name || it}
                       </a>
                     ))}
                   </div>
