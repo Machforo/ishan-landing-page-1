@@ -66,6 +66,24 @@ export default function Footer() {
   const rankingsCol = getColumnData(data?.footerLabels?.approvals, rankings, "Approvals & Rankings");
   const groupLinksCol = getColumnData(data?.footerLabels?.group, groupLinks, "Ishan Group");
 
+  const renderLink = (item, defaultTarget) => {
+    const label = item.name || item.text || item;
+    const url = item.url;
+    return (
+      <li key={label}>
+        <a
+          href={url ? url : `#${pick(label, defaultTarget)}`}
+          onClick={(e) => {
+            if (!url) scrollToId(e, pick(label, defaultTarget));
+          }}
+          className="hover:text-amber-400 transition"
+        >
+          {label}
+        </a>
+      </li>
+    );
+  };
+
   return (
     <footer className="bg-[#0a1232] text-gray-300">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-14">
@@ -112,82 +130,32 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-serif font-bold mb-4">{aboutCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {aboutCol.items.map((i, idx) => (
-                <li key={i || idx}>
-                  <a
-                    href={`#${pick(i, "about")}`}
-                    onClick={(e) => scrollToId(e, pick(i, "about"))}
-                    className="hover:text-amber-400 transition"
-                  >
-                    {i}
-                  </a>
-                </li>
-              ))}
+              {aboutCol.items.map((i) => renderLink(i, "about"))}
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-serif font-bold mb-4">{admissionsCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {admissionsCol.items.map((i, idx) => (
-                <li key={i || idx}>
-                  <a
-                    href={`#${pick(i, "programmes")}`}
-                    onClick={(e) => scrollToId(e, pick(i, "programmes"))}
-                    className="hover:text-amber-400 transition"
-                  >
-                    {i}
-                  </a>
-                </li>
-              ))}
+              {admissionsCol.items.map((i) => renderLink(i, "programmes"))}
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-serif font-bold mb-4">{quickLinksCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {quickLinksCol.items.map((i, idx) => (
-                <li key={i || idx}>
-                  <a
-                    href={`#${pick(i, "contact")}`}
-                    onClick={(e) => scrollToId(e, pick(i, "contact"))}
-                    className="hover:text-amber-400 transition"
-                  >
-                    {i}
-                  </a>
-                </li>
-              ))}
+              {quickLinksCol.items.map((i) => renderLink(i, "contact"))}
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-serif font-bold mb-4">{rankingsCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {rankingsCol.items.map((i, idx) => (
-                <li key={i || idx}>
-                  <a
-                    href={`#${pick(i, "about")}`}
-                    onClick={(e) => scrollToId(e, pick(i, "about"))}
-                    className="hover:text-amber-400 transition"
-                  >
-                    {i}
-                  </a>
-                </li>
-              ))}
+              {rankingsCol.items.map((i) => renderLink(i, "about"))}
             </ul>
             <h4 className="text-white font-serif font-bold mb-3 mt-6">{groupLinksCol.header}</h4>
             <ul className="space-y-2 text-sm">
-              {groupLinksCol.items.map((i, idx) => (
-                <li key={i || idx}>
-                  <a
-                    href={`#${pick(i, "about")}`}
-                    onClick={(e) => scrollToId(e, pick(i, "about"))}
-                    className="hover:text-amber-400 transition"
-                  >
-                    {i}
-                  </a>
-                </li>
-              ))}
+              {groupLinksCol.items.map((i) => renderLink(i, "about"))}
             </ul>
           </div>
         </div>
