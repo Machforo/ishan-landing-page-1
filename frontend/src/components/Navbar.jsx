@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, Search, ChevronDown, Phone, ArrowRight } from "lucide-react";
-import { navMenu, ISHAN_LOGO } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import TopBar from "./TopBar";
 
 const SECTION_MAP = {
@@ -43,6 +45,7 @@ const menuIcons = {
 };
 
 export default function Navbar() {
+  const { data } = useContext(DataContext);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
@@ -54,12 +57,20 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleNav = (e, target) => {
     e.preventDefault();
     setActiveMenu(null);
     setOpen(false);
-    scrollTo(target);
-    window.history.pushState(null, '', '#' + target);
+    
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => scrollTo(target), 100);
+    } else {
+      scrollTo(target);
+    }
   };
 
   const darkText = false;
@@ -80,7 +91,7 @@ export default function Navbar() {
               className="flex items-center gap-3 group shrink-0"
             >
               <img
-                src={ISHAN_LOGO}
+                src={data.ISHAN_LOGO}
                 alt="Ishan Educational Institutions"
                 className={`h-14 lg:h-[60px] w-auto object-contain group-hover:scale-105 transition-all ${
                   darkText ? "" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
@@ -93,9 +104,9 @@ export default function Navbar() {
               className="hidden xl:flex items-center"
               onMouseLeave={() => setActiveMenu(null)}
             >
-              {navMenu.map((m) => (
+              {(data?.navMenu || []).map((m, idx) => (
                 <div
-                  key={m.title}
+                  key={m.title || idx}
                   className="relative"
                   onMouseEnter={() => setActiveMenu(m.title)}
                 >
@@ -232,9 +243,8 @@ export default function Navbar() {
                     </a>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-1">
-                    {navMenu
-                      .find((x) => x.title === activeMenu)
-                      ?.items.map((it, i) => (
+                    {((data?.navMenu || []).find((x) => x.title === activeMenu)?.items || [])
+                      .map((it, i) => (
                         <a
                           key={`${it.name || it}-${i}`}
                           href={it.url ? it.url : `#${SECTION_MAP[it.name || it] || "top"}`}
@@ -282,8 +292,8 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="px-2 py-3">
-              {navMenu.map((m) => (
-                <details key={m.title} className="border-b border-gray-100 group">
+              {(data?.navMenu || []).map((m, idx) => (
+                <details key={m.title || idx} className="border-b border-gray-100 group">
                   <summary className="flex items-center justify-between px-3 py-3.5 cursor-pointer text-[14px] font-semibold uppercase text-gray-800 list-none group-open:text-[#1e3a8a]">
                     <span className="flex items-center gap-2">
                       <span className="text-base">{menuIcons[m.title]}</span>
@@ -292,9 +302,9 @@ export default function Navbar() {
                     <ChevronDown size={16} className="group-open:rotate-180 transition" />
                   </summary>
                   <div className="pl-6 pb-2 bg-gray-50">
-                    {m.items.map((it, idx) => (
+                    {(m.items || []).map((it, sIdx) => (
                       <a
-                        key={`${it.name || it}-${idx}`}
+                        key={`${it.name || it}-${sIdx}`}
                         href={it.url ? it.url : `#${SECTION_MAP[it.name || it] || "top"}`}
                         onClick={(e) => {
                           if (!it.url) handleNav(e, SECTION_MAP[it.name || it] || "top");

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { aboutImages, universityAchievements } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ArrowRight, ChevronLeft, ChevronRight, Award } from "lucide-react";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 
 export default function About() {
+  const { data } = useContext(DataContext);
   const [img, setImg] = useState(0);
 
   return (
@@ -25,13 +27,10 @@ export default function About() {
               <span className="w-8 h-px bg-amber-400" /> About Ishan
             </span>
             <h2 className="font-serif text-3xl md:text-[42px] font-bold mt-4 leading-[1.15]">
-              The first multi-disciplinary institution of{" "}
-              <span className="text-amber-400">Greater Noida</span>, shaping professionals since 1994
+              {data.aboutContent?.title || "The first multi-disciplinary institution of Greater Noida"}
             </h2>
             <p className="mt-5 text-gray-300 leading-relaxed text-[15px] max-w-lg">
-              From a single management institute to five thriving colleges across Law, Management,
-              Pharmacy, Ayurveda and Education, Ishan has grown into one of North India's most
-              respected names in higher education, with 50,000+ alumni in leadership roles worldwide.
+              {data.aboutContent?.description || "Shaping professionals since 1994."}
             </p>
             <a
               href="#"
@@ -69,7 +68,7 @@ export default function About() {
           <Reveal direction="right">
             <div className="relative">
               <div className="relative h-[500px] overflow-hidden">
-                {aboutImages.map((a, i) => (
+                {data.aboutImages.map((a, i) => (
                   <img
                     key={i}
                     src={a}
@@ -83,14 +82,14 @@ export default function About() {
               </div>
               <div className="absolute bottom-4 right-4 flex gap-2">
                 <button
-                  onClick={() => setImg((i) => (i - 1 + aboutImages.length) % aboutImages.length)}
+                  onClick={() => setImg((i) => (i - 1 + data.aboutImages.length) % data.aboutImages.length)}
                   className="w-11 h-11 bg-white/20 hover:bg-[#1e3a8a] backdrop-blur flex items-center justify-center transition-all hover:scale-110"
                   aria-label="Previous"
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button
-                  onClick={() => setImg((i) => (i + 1) % aboutImages.length)}
+                  onClick={() => setImg((i) => (i + 1) % data.aboutImages.length)}
                   className="w-11 h-11 bg-white/20 hover:bg-[#1e3a8a] backdrop-blur flex items-center justify-center transition-all hover:scale-110"
                   aria-label="Next"
                 >
@@ -106,7 +105,7 @@ export default function About() {
 
         <div className="mt-16 border-t border-white/10 pt-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {universityAchievements.map((a, i) => (
+            {data.universityAchievements.map((a, i) => (
               <Reveal key={a.id} delay={i * 80}>
                 <div className="text-center p-5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/40 transition-all hover:-translate-y-1 group">
                   <Award

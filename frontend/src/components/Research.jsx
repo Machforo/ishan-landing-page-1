@@ -1,9 +1,11 @@
 import React from "react";
-import { researchCards, researchLinks } from "../mock";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { ArrowRight, Microscope } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function Research() {
+  const { data } = useContext(DataContext);
   return (
     <section id="research" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="absolute -left-6 top-20 hidden lg:block">
@@ -19,22 +21,20 @@ export default function Research() {
               Research
             </span>
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-            Building blocks <br />
-            for <span className="italic text-[#1e3a8a]">breakthroughs</span>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 leading-tight whitespace-pre-line">
+            {data.researchSection?.heading || "Building blocks\nfor breakthroughs"}
           </h2>
           <p className="text-gray-600 mt-5 leading-relaxed text-[15px] max-w-lg">
-            At Ishan Educational Institutions, research is a commitment to discovery. Explore publications,
-            funded projects and collaborations across disciplines.
+            {data.researchSection?.subheading || "At Ishan Educational Institutions, research is a commitment to discovery."}
           </p>
           <a
             href="#"
             className="inline-flex items-center gap-2 mt-6 text-[#1e3a8a] font-semibold border-b-2 border-[#1e3a8a] pb-1 hover:gap-3 transition-all"
           >
-            Explore Research <ArrowRight size={16} />
+            {data.researchSection?.ctaText|| "Explore Research"} <ArrowRight size={16} />
           </a>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-            {researchLinks.map((l, i) => (
+            {data.researchLinks.map((l, i) => (
               <a
                 key={l}
                 href="#"
@@ -52,14 +52,14 @@ export default function Research() {
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {researchCards.map((c, i) => (
+          {data.researchCards.map((c, i) => (
             <Reveal key={c.id} delay={i * 150} direction="right">
               <a href="#" className="group relative overflow-hidden block">
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
                     src={c.image}
                     alt={c.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms]"
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
