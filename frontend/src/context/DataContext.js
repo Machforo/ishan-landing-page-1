@@ -79,9 +79,9 @@ export const DataProvider = ({ children }) => {
               items: m.items?.map(i => typeof i === 'string' ? { name: i } : { name: i.name || i.text || '', url: i.url || i.link || '' }) || []
             })) || [{items:[]}, {items:[]}, {items:[]}],
             footerLinks: backendData.footerLinks ? {
-              quickLinks: backendData.footerLinks.quickLinks?.map(l => l.text || l) || [],
-              rankings: backendData.footerLinks.rankings?.map(l => l.text || l) || [],
-              group: backendData.footerLinks.group?.map(l => l.text || l) || []
+              quickLinks: backendData.footerLinks.quickLinks?.map(l => typeof l === 'string' ? { text: l } : { text: l.text || '', url: l.url || '' }) || [],
+              rankings: backendData.footerLinks.rankings?.map(l => typeof l === 'string' ? { text: l } : { text: l.text || '', url: l.url || '' }) || [],
+              group: backendData.footerLinks.group?.map(l => typeof l === 'string' ? { text: l } : { text: l.text || '', url: l.url || '' }) || []
             } : { quickLinks: [], rankings: [], group: [] },
             footerLabels: backendData.footerLabels || {},
             contactInfo: backendData.contactInfo || {},
