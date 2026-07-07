@@ -23,7 +23,7 @@ export default function Placements() {
     const fetchPlacementData = async () => {
       try {
         const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
-        const response = await axios.get(`${apiUrl}/placement-head`);
+        const response = await axios.get(`${apiUrl}/placement-head-v2`);
         if (response.data) {
           setPlacementData(prev => ({
             image: response.data.image || prev.image,
@@ -38,7 +38,7 @@ export default function Placements() {
           }));
         }
       } catch (error) {
-        console.error("Error fetching placement data:", error);
+        console.error("Error fetching placement data v2:", error);
       }
     };
     fetchPlacementData();
@@ -119,12 +119,8 @@ export default function Placements() {
                   key={i}
                   className="shrink-0 w-44 h-20 bg-white border border-gray-200 flex items-center justify-center gap-2 shadow-sm rounded hover:shadow-md hover:border-[#1e3a8a] transition-all"
                 >
-                  {r.icon ? (
-                    <img src={r.icon} alt={r.name} className="w-8 h-8 object-contain" />
-                  ) : (
-                    <Building2 size={18} className="text-[#1e3a8a]" />
-                  )}
-                  <span className="font-semibold text-gray-700 text-sm">{r.name}</span>
+                  <Building2 size={18} className="text-[#1e3a8a]" />
+                  <span className="font-semibold text-gray-700 text-sm">{r}</span>
                 </div>
               ))}
             </div>
