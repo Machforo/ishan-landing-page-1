@@ -17,10 +17,10 @@ export default function Colleges() {
         const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
         const response = await axios.get(`${apiUrl}/college-head`);
         if (response.data) {
-          setHeadData({
-            heading: response.data.heading || headData.heading,
-            text: response.data.text || headData.text
-          });
+          setHeadData(prev => ({
+            heading: response.data.heading || prev.heading,
+            text: response.data.text || prev.text
+          }));
         }
       } catch (error) {
         console.error("Error fetching college head data:", error);

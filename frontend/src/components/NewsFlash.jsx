@@ -13,7 +13,7 @@ export default function NewsFlash() {
     if (paused) return;
     const t = setInterval(() => setIdx((i) => (i + 1) % TICKER.length), 3800);
     return () => clearInterval(t);
-  }, [paused]);
+  }, [paused, TICKER.length]);
 
   const active = TICKER[idx];
 
