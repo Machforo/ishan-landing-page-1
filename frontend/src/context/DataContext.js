@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
     aboutImages: [],
     news: [],
     socialPosts: [],
-    navMenu: [{ items: [] }, { items: [] }, { items: [] }],
+    navMenu: [{items:[]}, {items:[]}, {items:[]}],
     footerLinks: { quickLinks: [], rankings: [], group: [] },
     footerLabels: {},
     contactInfo: {},
@@ -42,7 +42,7 @@ export const DataProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
-        const response = await axios.get(`${apiUrl}/landing2`);
+        const response = await axios.get(`${apiUrl}/landing1`);
         const backendData = response.data;
 
         if (backendData) {
@@ -54,8 +54,6 @@ export const DataProvider = ({ children }) => {
               tag: b.tag,
               title: b.title,
               subtitle: b.subtitle,
-              ctaText: b.ctaText || "Apply Now",
-              ctaLink: b.ctaLink || "#contact",
               specialisations: b.specialisations?.map(s => s.name || s) || [],
               programs: b.programs?.map(p => p.name || p) || [],
               stats: b.stats || []
@@ -70,7 +68,7 @@ export const DataProvider = ({ children }) => {
             researchCards: backendData.researchCards || [],
             researchLinks: backendData.researchLinks?.map(l => l.text || l) || [],
             placementStats: backendData.placementStats || [],
-            recruiters: backendData.recruiters?.map(r => r.name || r) || [],
+            recruiters: backendData.recruiters?.map(r => ({ name: r.name || (typeof r === 'string' ? r : ""), icon: r.icon })) || [],
             testimonials: backendData.testimonials || [],
             universityAchievements: backendData.achievements || [],
             aboutImages: backendData.aboutImages?.map(img => img.url || img) || [],
@@ -79,7 +77,7 @@ export const DataProvider = ({ children }) => {
             navMenu: backendData.navMenu?.map(m => ({
               title: m.title || m,
               items: m.items?.map(i => typeof i === 'string' ? { name: i } : { name: i.name || i.text || '', url: i.url || i.link || '' }) || []
-            })) || [{ items: [] }, { items: [] }, { items: [] }],
+            })) || [{items:[]}, {items:[]}, {items:[]}],
             footerLinks: backendData.footerLinks ? {
               quickLinks: backendData.footerLinks.quickLinks?.map(l => l.text || l) || [],
               rankings: backendData.footerLinks.rankings?.map(l => l.text || l) || [],

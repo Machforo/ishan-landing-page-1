@@ -67,13 +67,9 @@ export default function Navbar() {
     
     if (location.pathname !== "/") {
       navigate("/");
-      setTimeout(() => {
-        scrollTo(target);
-        window.history.pushState(null, '', '/#' + target);
-      }, 100);
+      setTimeout(() => scrollTo(target), 100);
     } else {
       scrollTo(target);
-      window.history.pushState(null, '', '#' + target);
     }
   };
 
@@ -83,14 +79,14 @@ export default function Navbar() {
     <>
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-[#1e3a8a] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]" : "bg-[#0a1232]/80 backdrop-blur-md"
+          scrolled ? "bg-[#1e3a8a] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]" : "bg-transparent"
         }`}
       >
         <TopBar scrolled={scrolled} />
         <header className="w-full">
           <div className="max-w-[1400px] mx-auto px-5 lg:px-8 flex items-center justify-between h-[82px] gap-4">
             <a
-              href="/"
+              href="#top"
               onClick={(e) => handleNav(e, "top")}
               className="flex items-center gap-3 group shrink-0"
             >
@@ -105,12 +101,12 @@ export default function Navbar() {
             </a>
 
             <nav
-              className="hidden lg:flex items-center"
+              className="hidden xl:flex items-center"
               onMouseLeave={() => setActiveMenu(null)}
             >
-              {data.navMenu.map((m, mi) => (
+              {(data?.navMenu || []).map((m, idx) => (
                 <div
-                  key={m.title || mi}
+                  key={m.title || idx}
                   className="relative"
                   onMouseEnter={() => setActiveMenu(m.title)}
                 >
@@ -189,7 +185,7 @@ export default function Navbar() {
                 </span>
               </a>
               <button
-                className={`lg:hidden p-2 ${darkText ? "text-[#1e3a8a]" : "text-white"}`}
+                className={`xl:hidden p-2 ${darkText ? "text-[#1e3a8a]" : "text-white"}`}
                 onClick={() => setOpen(true)}
                 aria-label="Open menu"
               >
@@ -247,23 +243,22 @@ export default function Navbar() {
                     </a>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-1">
-                    {data.navMenu
-                      .find((x) => x.title === activeMenu)
-                        ?.items.map((it, i) => (
-                          <a
-                            key={`${it.name || it}-${i}`}
-                            href={it.url ? it.url : `#${SECTION_MAP[it.name || it] || "top"}`}
-                            onClick={(e) => {
-                              if (!it.url) handleNav(e, SECTION_MAP[it.name || it] || "top");
-                            }}
-                            className="group flex items-center gap-2 py-2.5 border-b border-gray-100 text-[13px] text-gray-700 hover:text-[#1e3a8a] transition-all"
-                            style={{ animation: `itemFade 0.35s ease-out ${i * 0.03}s both` }}
-                          >
-                            <span className="w-1 h-1 rounded-full bg-[#1e3a8a] opacity-0 group-hover:opacity-100 transition" />
-                            <span className="flex-1 group-hover:translate-x-1 transition-transform">
-                              {it.name || it}
-                            </span>
-                            <ArrowRight
+                    {((data?.navMenu || []).find((x) => x.title === activeMenu)?.items || [])
+                      .map((it, i) => (
+                        <a
+                          key={`${it.name || it}-${i}`}
+                          href={it.url ? it.url : `#${SECTION_MAP[it.name || it] || "top"}`}
+                          onClick={(e) => {
+                            if (!it.url) handleNav(e, SECTION_MAP[it.name || it] || "top");
+                          }}
+                          className="group flex items-center gap-2 py-2.5 border-b border-gray-100 text-[13px] text-gray-700 hover:text-[#1e3a8a] transition-all"
+                          style={{ animation: `itemFade 0.35s ease-out ${i * 0.03}s both` }}
+                        >
+                          <span className="w-1 h-1 rounded-full bg-[#1e3a8a] opacity-0 group-hover:opacity-100 transition" />
+                          <span className="flex-1 group-hover:translate-x-1 transition-transform">
+                            {it.name || it}
+                          </span>
+                          <ArrowRight
                             size={12}
                             className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#1e3a8a]"
                           />
@@ -297,8 +292,8 @@ export default function Navbar() {
               </button>
             </div>
             <nav className="px-2 py-3">
-              {data.navMenu.map((m, mi) => (
-                <details key={m.title || mi} className="border-b border-gray-100 group">
+              {(data?.navMenu || []).map((m, idx) => (
+                <details key={m.title || idx} className="border-b border-gray-100 group">
                   <summary className="flex items-center justify-between px-3 py-3.5 cursor-pointer text-[14px] font-semibold uppercase text-gray-800 list-none group-open:text-[#1e3a8a]">
                     <span className="flex items-center gap-2">
                       <span className="text-base">{menuIcons[m.title]}</span>
@@ -307,9 +302,9 @@ export default function Navbar() {
                     <ChevronDown size={16} className="group-open:rotate-180 transition" />
                   </summary>
                   <div className="pl-6 pb-2 bg-gray-50">
-                    {m.items.map((it) => (
+                    {(m.items || []).map((it, sIdx) => (
                       <a
-                        key={it.name || it}
+                        key={`${it.name || it}-${sIdx}`}
                         href={it.url ? it.url : `#${SECTION_MAP[it.name || it] || "top"}`}
                         onClick={(e) => {
                           if (!it.url) handleNav(e, SECTION_MAP[it.name || it] || "top");

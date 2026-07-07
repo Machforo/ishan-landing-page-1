@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Sparkles } from "lucide-react";
+import axios from "axios";
 
 export default function Marquee() {
-  const text =
-    "Ishan Educational Institutions, Admissions Open 2026-27: BA/BBA LL.B • LL.M • PGDM • MBA • B.Com • BCA • B.Pharm • BAMS • B.Ed, 30+ years of academic excellence";
+  const [text, setText] = useState(
+    "Ishan Educational Institutions, Admissions Open 2026-27: BA/BBA LL.B • LL.M • PGDM • MBA • B.Com • BCA • B.Pharm • BAMS • B.Ed, 30+ years of academic excellence"
+  );
+
+  useEffect(() => {
+    const fetchMarquee = async () => {
+      try {
+        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const response = await axios.get(`${apiUrl}/marquee`);
+        if (response.data && response.data.text) {
+          setText(response.data.text);
+        }
+      } catch (error) {
+        console.error("Error fetching marquee text:", error);
+      }
+    };
+    fetchMarquee();
+  }, []);
+
   return (
     <div className="w-full bg-amber-500 text-[#0a1232] py-3 overflow-hidden relative group">
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-amber-500 to-transparent z-10 pointer-events-none" />
