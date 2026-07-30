@@ -63,7 +63,7 @@ export const DataProvider = ({ children }) => {
             programCategories: backendData.programCategories || [],
             programs: backendData.programs || {},
             colleges: backendData.colleges || [],
-            campusLife: backendData.campusLife?.sections || [],
+            campusLife: backendData.campusLife?.sections?.map(s => ({ ...s, gallery: s.gallery?.map(g => g.url || g) || [] })) || [],
             campusLifeStats: { nationalitiesCount: backendData.campusLife?.nationalitiesCount || "0" },
             campusLinks: backendData.campusLinks?.map(l => l.text || l) || [],
             facilityLinks: backendData.facilityLinks?.map(l => l.text || l) || [],
