@@ -1,3 +1,4 @@
+import PageGallery from "../components/PageGallery";
 import React from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
@@ -29,6 +30,7 @@ export default function LandingA() {
       <Happenings />
       <SocialWall />
       <Contact />
+      <PageGallery />
       <Footer />
       <FloatingWidgets />
     </div>
