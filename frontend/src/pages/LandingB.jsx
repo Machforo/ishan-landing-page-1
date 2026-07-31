@@ -1,3 +1,4 @@
+import PageGallery from "../components/PageGallery";
 import React from "react";
 import Navbar from "../components/Navbar";
 import HeroV2 from "../components/v2/HeroV2";
@@ -27,6 +28,7 @@ export default function LandingB() {
       <CampusLife />
       <Happenings />
       <Contact />
+      <PageGallery />
       <Footer />
       <FloatingWidgets />
     </div>
