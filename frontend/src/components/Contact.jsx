@@ -12,6 +12,7 @@ const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').regex(/^[a-zA-Z\s]*$/, 'Name can only contain letters and spaces'),
   phone: z.string().regex(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits'),
   email: z.string().email('Invalid email address').or(z.literal('')).optional()
+});
 export default function Contact() {
   const { data } = useContext(DataContext);
   const { contactInfo } = data;
