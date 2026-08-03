@@ -21,11 +21,28 @@ export default function Contact() {
     const formData = new FormData(e.target);
     const leadData = Object.fromEntries(formData.entries());
 
+    const nameRegex = /^[a-zA-Z\s.'-]+$/;
+    if (!leadData.name || !nameRegex.test(leadData.name.trim())) {
+      alert("Name should only contain alphabets and spaces.");
+      return;
+    }
+
+    const phoneRegex = /^\d{10}$/;
+    if (!leadData.phone || !phoneRegex.test(leadData.phone.trim())) {
+      alert("Phone number must be 10 digits.");
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (leadData.email && !emailRegex.test(leadData.email.trim())) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     try {
       const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       await axios.post(`${apiUrl}/landing2/leads`, leadData);
       setSent(true);
-      setTimeout(() => setSent(false), 3500);
       e.target.reset();
     } catch (err) {
       console.error("Error submitting lead:", err);
@@ -169,6 +186,7 @@ export default function Contact() {
                         name="name"
                         className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#1e3a8a] focus:ring-2 focus:ring-[#1e3a8a]/10 transition"
                         placeholder="Your full name"
+                        onInput={(e) => { e.target.value = e.target.value.replace(/[^a-zA-Z\s.'-]/g, ''); }}
                       />
                     </div>
                     <div>

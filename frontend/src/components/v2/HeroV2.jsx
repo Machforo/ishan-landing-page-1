@@ -91,6 +91,23 @@ export default function HeroV2() {
 
   const submit = async (e) => {
     e.preventDefault();
+
+    const nameRegex = /^[a-zA-Z\s.'-]+$/;
+    if (!form.name || !nameRegex.test(form.name.trim())) {
+      alert("Name should only contain alphabets and spaces.");
+      return;
+    }
+    const phoneRegex = /^\d{10}$/;
+    if (!form.phone || !phoneRegex.test(form.phone.trim())) {
+      alert("Phone number must be 10 digits.");
+      return;
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (form.email && !emailRegex.test(form.email.trim())) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     try {
       const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       await axios.post(`${apiUrl}/landing2/leads`, form);
@@ -105,7 +122,7 @@ export default function HeroV2() {
     }
   };
 
-  const onChange = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+  const onChange = (k) => (e) => setForm((f) => ({ ...f, [k]: k === 'name' ? e.target.value.replace(/[^a-zA-Z\s.'-]/g, '') : e.target.value }));
 
   return (
     <section
