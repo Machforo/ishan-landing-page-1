@@ -103,6 +103,8 @@ export const DataProvider = ({ children }) => {
     };
 
     fetchData();
+    window.addEventListener('focus', fetchData);
+    return () => window.removeEventListener('focus', fetchData);
   }, []);
 
   return (
