@@ -63,13 +63,15 @@ export default function CampusLife() {
                 <div className="text-lg font-serif">on Campus</div>
               </div>
               <div className="mt-8 space-y-3 text-sm relative z-10">
-                {data.campusLinks.map((l) => (
+                {(data.campusLinks || []).map((l) => (
                   <a
-                    key={l}
-                    href="#campus"
+                    key={l.text}
+                    href={l.url || "#campus"}
+                    target={l.url && l.url.startsWith("http") ? "_blank" : undefined}
+                    rel={l.url && l.url.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="flex items-center justify-between border-b border-white/20 pb-2 hover:text-amber-400 hover:translate-x-1 transition-all duration-300 group"
                   >
-                    <span>{l}</span>
+                    <span>{l.text}</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition" />
                   </a>
                 ))}
@@ -117,17 +119,19 @@ export default function CampusLife() {
             ))}
 
             <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {data.facilityLinks.map((f, i) => (
-                <Reveal key={f} delay={300 + i * 100}>
+              {(data.facilityLinks || []).map((f, i) => (
+                <Reveal key={f.text || i} delay={300 + i * 100}>
                   <a
-                    href="#campus"
+                    href={f.url || "#campus"}
+                    target={f.url && f.url.startsWith("http") ? "_blank" : undefined}
+                    rel={f.url && f.url.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="group bg-white p-6 flex items-center justify-between border-l-4 border-[#1e3a8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-full bg-[#1e3a8a]/10 flex items-center justify-center text-[#1e3a8a] group-hover:bg-[#1e3a8a] group-hover:text-white transition">
                         {i === 0 ? <MapPin size={20} /> : <Trophy size={20} />}
                       </div>
-                      <span className="font-serif text-lg font-semibold text-gray-900">{f}</span>
+                      <span className="font-serif text-lg font-semibold text-gray-900">{f.text}</span>
                     </div>
                     <ArrowRight
                       size={18}
