@@ -33,14 +33,14 @@ export default function About() {
               {data.aboutContent?.description || "Shaping professionals since 1994."}
             </p>
             <a
-              href="#"
+              href={data.aboutContent?.ctaLink || "#about"}
               className="relative inline-flex items-center gap-2 mt-7 bg-[#1e3a8a] text-white px-7 py-3.5 text-sm font-semibold uppercase tracking-wider overflow-hidden group"
             >
-              <span className="relative z-10">Our Story</span>
+              <span className="relative z-10">{data.aboutContent?.ctaText || "Our Story"}</span>
               <ArrowRight size={16} className="relative z-10" />
               <span className="absolute inset-0 bg-amber-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
               <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition text-[#0a1232]">
-                Our Story <ArrowRight size={16} />
+                {data.aboutContent?.ctaText || "Our Story"} <ArrowRight size={16} />
               </span>
             </a>
             <div className="grid grid-cols-3 gap-6 mt-10">

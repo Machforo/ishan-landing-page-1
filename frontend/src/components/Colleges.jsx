@@ -55,7 +55,9 @@ export default function Colleges() {
           {data.colleges.map((c, i) => (
             <Reveal key={c.id} delay={i * 100}>
               <a
-                href="#"
+                href={c.ctaLink || "#"}
+                target={c.ctaLink && c.ctaLink.startsWith("http") ? "_blank" : undefined}
+                rel={c.ctaLink && c.ctaLink.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="group block bg-white border border-gray-200 hover:border-[#1e3a8a] hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden h-full"
               >
                 <div className="relative h-52 overflow-hidden">
@@ -84,7 +86,7 @@ export default function Colleges() {
                   </div>
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <span className="text-xs font-semibold text-gray-500 group-hover:text-[#1e3a8a] transition">
-                      EXPLORE COLLEGE
+                      {c.ctaText || "EXPLORE COLLEGE"}
                     </span>
                     <div className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#1e3a8a] group-hover:border-[#1e3a8a] group-hover:text-white text-[#1e3a8a] transition-all">
                       <ArrowRight size={14} className="group-hover:translate-x-0.5 transition" />

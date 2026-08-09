@@ -15,9 +15,17 @@ const ALL_SCHOOLS = [
   "Ishan Institute of Education",
 ];
 
+const DEFAULT_CATEGORIES = [
+  { id: "ug", label: "Undergraduate" },
+  { id: "pg", label: "PG" },
+  { id: "diploma", label: "Diploma" },
+  { id: "doctoral", label: "Doctoral" },
+];
+
 export default function Programmes() {
   const { data } = useContext(DataContext);
-  const [active, setActive] = useState(data.programCategories?.[0]?.id || "ug");
+  const categories = data.programCategories?.length ? data.programCategories : DEFAULT_CATEGORIES;
+  const [active, setActive] = useState(categories[0]?.id || "ug");
   const [query, setQuery] = useState("");
   const [school, setSchool] = useState("All Colleges");
   const [headRef, headIn] = useReveal();
@@ -27,7 +35,9 @@ export default function Programmes() {
     subheading: data.programmeSection?.subheading || "Explore programmes across Law, Management, Pharmacy, Ayurveda and Education, approved by BCI, AICTE, PCI, NCISM and NCTE.",
     searchPlaceholder: data.programmeSection?.searchPlaceholder || "Search programmes (e.g. LL.B, MBA, Pharmacy)...",
     ctaApply: data.programmeSection?.ctaApply || "Apply Now",
-    ctaViewAll: data.programmeSection?.ctaViewAll || "View Colleges"
+    ctaApplyLink: data.programmeSection?.ctaApplyLink || "#contact",
+    ctaViewAll: data.programmeSection?.ctaViewAll || "View Colleges",
+    ctaViewAllLink: data.programmeSection?.ctaViewAllLink || "#colleges"
   });
 
   useEffect(() => {
@@ -41,7 +51,9 @@ export default function Programmes() {
             subheading: response.data.subheading || prev.subheading,
             searchPlaceholder: response.data.searchPlaceholder || prev.searchPlaceholder,
             ctaApply: response.data.ctaApply || prev.ctaApply,
-            ctaViewAll: response.data.ctaViewAll || prev.ctaViewAll
+            ctaApplyLink: response.data.ctaApplyLink || prev.ctaApplyLink,
+            ctaViewAll: response.data.ctaViewAll || prev.ctaViewAll,
+            ctaViewAllLink: response.data.ctaViewAllLink || prev.ctaViewAllLink
           }));
         }
       } catch (error) {
@@ -95,7 +107,7 @@ export default function Programmes() {
 
         {/* Tabs */}
         <div className="flex flex-wrap gap-2 mb-5 border-b border-gray-200">
-          {data.programCategories.map((c) => (
+          {categories.map((c) => (
             <button
               key={c.id}
               onClick={() => {
@@ -210,7 +222,7 @@ export default function Programmes() {
 
         <div className="flex justify-center mt-10 gap-4">
           <a
-            href="#contact"
+            href={progHeadData.ctaApplyLink || "#contact"}
             className="relative inline-flex items-center bg-[#1e3a8a] text-white font-semibold px-7 py-3 text-sm uppercase tracking-wider shadow overflow-hidden group"
           >
             <span className="relative z-10">{progHeadData.ctaApply}</span>
@@ -220,7 +232,7 @@ export default function Programmes() {
             </span>
           </a>
           <a
-            href="#colleges"
+            href={progHeadData.ctaViewAllLink || "#colleges"}
             className="inline-flex items-center border-2 border-[#1e3a8a] text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white font-semibold px-7 py-3 text-sm uppercase tracking-wider transition"
           >
             {progHeadData.ctaViewAll}

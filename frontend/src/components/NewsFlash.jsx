@@ -7,7 +7,7 @@ export default function NewsFlash() {
   const TICKER = data.newsFlash || [];
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(null); // stores the news item to show
 
   useEffect(() => {
     if (paused) return;
@@ -18,9 +18,8 @@ export default function NewsFlash() {
   const active = TICKER[idx];
 
   return (
-    <>
-      <div
-        className="w-full bg-white/95 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden border-t-4 border-amber-500"
+    <div
+        className="relative w-full bg-white/95 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden border-t-4 border-amber-500"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -70,7 +69,7 @@ export default function NewsFlash() {
               </h4>
               <p className="text-[12.5px] text-gray-600 leading-relaxed line-clamp-3">{n.body}</p>
               <button
-                onClick={() => setModal(true)}
+                onClick={() => setModal(n)}
                 className="inline-flex items-center gap-1.5 mt-3 text-[11px] font-bold text-[#1e3a8a] hover:gap-2 transition-all"
               >
                 READ MORE <ArrowRight size={11} />
@@ -116,37 +115,39 @@ export default function NewsFlash() {
             VIEW ALL <ArrowRight size={11} />
           </a>
         </div>
-      </div>
-
+      {/* In-card modal overlay */}
       {modal && (
-        <div
-          className="fixed inset-0 z-[80] bg-black/70 flex items-center justify-center p-4 animate-in fade-in"
-          onClick={() => setModal(false)}
-        >
-          <div
-            className="bg-white max-w-lg w-full p-8 relative"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="absolute inset-0 z-10 bg-white flex flex-col p-5 animate-card-modal">
+          <div className="flex items-start justify-between mb-3">
+            <span className="px-2.5 py-0.5 bg-[#1e3a8a] text-white text-[10px] font-bold tracking-widest">
+              {modal.tag}
+            </span>
             <button
-              onClick={() => setModal(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-[#1e3a8a]"
+              onClick={() => setModal(null)}
+              className="text-gray-400 hover:text-[#1e3a8a] transition-colors ml-2 mt-0.5"
+              aria-label="Close"
             >
-              <X size={20} />
+              <X size={16} />
             </button>
-            <div className="inline-block px-2.5 py-0.5 bg-[#1e3a8a] text-white text-[10px] font-bold tracking-widest mb-3">
-              {active.tag}
-            </div>
-            <h3 className="font-serif text-2xl font-bold text-gray-900 mb-3">{active.title}</h3>
-            <p className="text-sm text-gray-500 mb-4">{active.date}</p>
-            <p className="text-gray-700 leading-relaxed">{active.body}</p>
           </div>
+          <h4 className="font-serif text-[15px] font-bold text-gray-900 leading-snug mb-1.5">
+            {modal.title}
+          </h4>
+          <p className="text-[11px] text-gray-400 mb-2 flex items-center gap-1">
+            <Zap size={10} className="text-amber-500" /> {modal.date}
+          </p>
+          <p className="text-[12px] text-gray-600 leading-relaxed overflow-y-auto flex-1">
+            {modal.body}
+          </p>
         </div>
       )}
 
       <style>{`
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .animate-progress { animation: progress 3.8s linear forwards; }
+        @keyframes cardModal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-card-modal { animation: cardModal 0.25s ease-out both; }
       `}</style>
-    </>
+    </div>
   );
 }

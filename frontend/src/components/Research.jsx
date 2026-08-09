@@ -28,20 +28,24 @@ export default function Research() {
             {data.researchSection?.subheading || "At Ishan Educational Institutions, research is a commitment to discovery."}
           </p>
           <a
-            href="#"
+            href={data.researchSection?.ctaLink || "#"}
+            target={data.researchSection?.ctaLink?.startsWith("http") ? "_blank" : undefined}
+            rel={data.researchSection?.ctaLink?.startsWith("http") ? "noopener noreferrer" : undefined}
             className="inline-flex items-center gap-2 mt-6 text-[#1e3a8a] font-semibold border-b-2 border-[#1e3a8a] pb-1 hover:gap-3 transition-all"
           >
             {data.researchSection?.ctaText|| "Explore Research"} <ArrowRight size={16} />
           </a>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-            {data.researchLinks.map((l, i) => (
+            {(data.researchLinks || []).map((l, i) => (
               <a
-                key={l}
-                href="#"
+                key={typeof l === 'string' ? l : l.text}
+                href={typeof l === 'string' ? '#' : (l.url || '#')}
+                target={typeof l !== 'string' && l.url?.startsWith("http") ? "_blank" : undefined}
+                rel={typeof l !== 'string' && l.url?.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="flex items-center justify-between border-b border-gray-200 py-3 text-[14px] text-gray-800 hover:text-[#1e3a8a] hover:border-[#1e3a8a] group transition-all"
                 style={{ animation: `fadeUp 0.5s ease-out ${i * 0.08}s both` }}
               >
-                <span className="group-hover:translate-x-1 transition">{l}</span>
+                <span className="group-hover:translate-x-1 transition">{typeof l === 'string' ? l : l.text}</span>
                 <ArrowRight
                   size={14}
                   className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
@@ -54,7 +58,12 @@ export default function Research() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {data.researchCards.map((c, i) => (
             <Reveal key={c.id} delay={i * 150} direction="right">
-              <a href="#" className="group relative overflow-hidden block">
+              <a
+                href={c.link || "#"}
+                target={c.link?.startsWith("http") ? "_blank" : undefined}
+                rel={c.link?.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="group relative overflow-hidden block"
+              >
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
                     src={c.image}
