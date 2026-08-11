@@ -53,7 +53,7 @@ export default function Colleges() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.colleges.map((c, i) => (
-            <Reveal key={c.id} delay={i * 100}>
+            <Reveal key={i} delay={i * 100}>
               <a
                 href={c.ctaLink || "#"}
                 target={c.ctaLink && c.ctaLink.startsWith("http") ? "_blank" : undefined}

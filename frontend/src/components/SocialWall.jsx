@@ -30,7 +30,7 @@ export default function SocialWall() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
           {data.socialPosts.map((p, i) => (
             <a
-              key={p.id}
+              key={i}
               href="#"
               className="group relative aspect-square overflow-hidden block"
               style={{ animation: `scaleIn 0.5s ease-out ${i * 0.06}s both` }}

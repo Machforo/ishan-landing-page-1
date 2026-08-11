@@ -134,7 +134,7 @@ export default function Placements() {
 
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
           {data.testimonials.map((t, i) => (
-            <Reveal key={t.id} delay={i * 150}>
+            <Reveal key={i} delay={i * 150}>
               <div className="group bg-white p-7 border-t-4 border-[#1e3a8a] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full">
                 <Quote size={32} className="text-amber-400 mb-3 group-hover:scale-110 transition" />
                 <p className="text-gray-700 text-[15px] leading-relaxed mb-6 italic">

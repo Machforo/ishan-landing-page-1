@@ -1,3 +1,4 @@
+import PageSections from "./components/PageSections";
 import PageGallery from "./components/PageGallery";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -35,6 +36,7 @@ function Home() {
       <Happenings />
       <SocialWall />
       <Contact />
+      <PageSections />
       <PageGallery />
       <Footer />
       <FloatingWidgets />

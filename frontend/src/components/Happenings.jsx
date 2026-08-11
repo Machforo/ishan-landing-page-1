@@ -30,7 +30,7 @@ export default function Happenings() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {data.news.map((n, i) => (
-            <Reveal key={n.id} delay={i * 120}>
+            <Reveal key={i} delay={i * 120}>
               <a
                 href="#"
                 className="group bg-white border border-gray-100 hover:border-[#1e3a8a] hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden block h-full"

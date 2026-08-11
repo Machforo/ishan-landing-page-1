@@ -57,7 +57,7 @@ export default function Research() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {data.researchCards.map((c, i) => (
-            <Reveal key={c.id} delay={i * 150} direction="right">
+            <Reveal key={i} delay={i * 150} direction="right">
               <a
                 href={c.link || "#"}
                 target={c.link?.startsWith("http") ? "_blank" : undefined}

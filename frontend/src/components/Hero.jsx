@@ -33,7 +33,7 @@ export default function Hero() {
     >
       {data.heroSlides.map((s, i) => (
         <div
-          key={s.id}
+          key={i}
           className={`absolute inset-0 transition-opacity duration-1000 ${
             i === idx ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
@@ -54,7 +54,7 @@ export default function Hero() {
           Admissions 2026-27
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 items-center">
-          <div key={slide.id} className="max-w-2xl">
+          <div key={idx} className="max-w-2xl">
             <div className="inline-block px-4 py-1.5 bg-[#1e3a8a] text-[10px] font-bold tracking-[0.25em] mb-4 slide-enter-1">
               {slide.tag}
             </div>

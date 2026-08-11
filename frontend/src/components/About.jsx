@@ -106,7 +106,7 @@ export default function About() {
         <div className="mt-16 border-t border-white/10 pt-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {data.universityAchievements.map((a, i) => (
-              <Reveal key={a.id} delay={i * 80}>
+              <Reveal key={i} delay={i * 80}>
                 <div className="text-center p-5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/40 transition-all hover:-translate-y-1 group">
                   <Award
                     size={34}

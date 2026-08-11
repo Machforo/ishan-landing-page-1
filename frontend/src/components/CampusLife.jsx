@@ -86,7 +86,7 @@ export default function CampusLife() {
 
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             {data.campusLife.map((c, i) => (
-              <Reveal key={c.id} delay={i * 150}>
+              <Reveal key={i} delay={i * 150}>
                 <button
                   onClick={() => setActive(c)}
                   className="group relative w-full h-64 md:h-full min-h-[280px] overflow-hidden block text-left"
