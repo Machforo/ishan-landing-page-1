@@ -1,3 +1,4 @@
+import PageSections from "../components/PageSections";
 import PageGallery from "../components/PageGallery";
 import React from "react";
 import Navbar from "../components/Navbar";
@@ -30,6 +31,7 @@ export default function LandingA() {
       <Happenings />
       <SocialWall />
       <Contact />
+      <PageSections />
       <PageGallery />
       <Footer />
       <FloatingWidgets />
