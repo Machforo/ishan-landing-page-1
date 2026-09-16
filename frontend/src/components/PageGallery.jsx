@@ -12,7 +12,7 @@ export default function PageGallery({ images: propImages, title: propTitle }) {
           ? process.env.REACT_APP_API_URL 
           : (typeof import.meta !== 'undefined' && import.meta.env ? (import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL) : null);
           
-        const apiBase = envApiBase || "http://localhost:5000/api";
+        const apiBase = envApiBase || "https://ishan-backend-g096.onrender.com/api";
         const res = await fetch(`${apiBase}/landing2/page-galleries/by-url?url=${location.pathname}`);
         if (res.ok) {
           const data = await res.json();
