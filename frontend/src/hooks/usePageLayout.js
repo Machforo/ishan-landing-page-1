@@ -6,12 +6,12 @@ const getApiBase = () => {
   }
   try {
     if (typeof import.meta !== "undefined" && import.meta?.env) {
-      return import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+      return import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || "https://ishan-backend-g096.onrender.com/api";
     }
   } catch (e) {
     // ignore
   }
-  return "http://localhost:5000/api";
+  return "https://ishan-backend-g096.onrender.com/api";
 };
 
 export function usePageLayout(pageId = "homepage") {
@@ -29,7 +29,7 @@ export function usePageLayout(pageId = "homepage") {
       } catch (networkErr) {
         if (!apiBase.includes("localhost:5000")) {
           try {
-            res = await fetch(`http://localhost:5000/api/landing1/page-layout/${pageId}`);
+            res = await fetch(`https://ishan-backend-g096.onrender.com/api/landing1/page-layout/${pageId}`);
           } catch (localErr) {
             throw networkErr;
           }
