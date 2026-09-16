@@ -52,7 +52,7 @@ export default function HeroV2() {
   useEffect(() => {
     const fetchHeroContent = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
         const response = await axios.get(`${apiUrl}/hero-v2`);
         if (response.data) {
           const d = response.data;
@@ -109,7 +109,7 @@ export default function HeroV2() {
     }
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
       await axios.post(`${apiUrl}/landing2/leads`, form);
       setSent(true);
       setTimeout(() => {

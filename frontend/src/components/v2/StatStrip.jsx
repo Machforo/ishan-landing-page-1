@@ -61,7 +61,7 @@ export default function StatStrip() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
         const response = await axios.get(`${apiUrl}/stats-strip`);
         const rawItems = response.data?.items || response.data;
         if (rawItems && Array.isArray(rawItems) && rawItems.length > 0) {
