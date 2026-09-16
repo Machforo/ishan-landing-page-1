@@ -8,11 +8,7 @@ export default function PageGallery({ images: propImages, title: propTitle }) {
   useEffect(() => {
     const fetchGlobalGallery = async () => {
       try {
-        const envApiBase = typeof process !== 'undefined' && process.env.REACT_APP_API_URL 
-          ? process.env.REACT_APP_API_URL 
-          : (typeof import.meta !== 'undefined' && import.meta.env ? (import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL) : null);
-          
-        const apiBase = envApiBase || "https://ishan-backend-g096.onrender.com/api";
+        const apiBase = (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) || "https://ishan-backend-g096.onrender.com/api";
         const portal = "landing1";
         const fetchUrl = `${apiBase}/${portal}/page-galleries/by-url?url=${location.pathname}`;
         

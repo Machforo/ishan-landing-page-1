@@ -4,13 +4,6 @@ const getApiBase = () => {
   if (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) {
     return process.env.REACT_APP_API_URL;
   }
-  try {
-    if (typeof import.meta !== "undefined" && import.meta?.env) {
-      return import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || "https://ishan-backend-g096.onrender.com/api";
-    }
-  } catch (e) {
-    // ignore
-  }
   return "https://ishan-backend-g096.onrender.com/api";
 };
 
