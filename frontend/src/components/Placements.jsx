@@ -22,7 +22,7 @@ export default function Placements() {
   useEffect(() => {
     const fetchPlacementData = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
         const response = await axios.get(`${apiUrl}/placement-head`);
         if (response.data) {
           setPlacementData(prev => ({

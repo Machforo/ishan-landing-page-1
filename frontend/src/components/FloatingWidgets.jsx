@@ -32,7 +32,7 @@ export default function FloatingWidgets() {
     }
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
       await axios.post(`${apiUrl}/landing1/leads`, leadData);
       setSent(true);
       toast.success("Enquiry submitted successfully! Our counsellor will call you back.");

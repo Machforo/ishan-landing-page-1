@@ -10,7 +10,7 @@ export default function Marquee() {
   useEffect(() => {
     const fetchMarquee = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
         const response = await axios.get(`${apiUrl}/marquee`);
         if (response.data && response.data.text) {
           setText(response.data.text);

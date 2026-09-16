@@ -14,7 +14,7 @@ export default function Colleges() {
   useEffect(() => {
     const fetchHeadData = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const apiUrl = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
         const response = await axios.get(`${apiUrl}/college-head`);
         if (response.data) {
           setHeadData(prev => ({

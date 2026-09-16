@@ -12,7 +12,7 @@ export default function DynamicPageRenderer({ portal }) {
   useEffect(() => {
     const fetchPage = async () => {
       try {
-        const apiBase = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const apiBase = process.env.REACT_APP_API_URL || "https://ishan-backend-g096.onrender.com/api";
         const res = await fetch(`${apiBase.replace('/api', '')}/api/dynamic-pages/${portal}/${slug}`);
         
         if (!res.ok) throw new Error("Not found");
