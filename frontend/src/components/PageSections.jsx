@@ -35,11 +35,20 @@ export default function PageSections({ sections: propSections }) {
      actualSections = actualSections.sections;
   }
 
-  if (!actualSections || !Array.isArray(actualSections) || actualSections.length === 0) return null;
+    if (!actualSections || !Array.isArray(actualSections) || actualSections.length === 0) return null;
+
+  const renderedSet = (typeof window !== 'undefined' && window.__renderedCustomHtmls) || new Set();
+  const unrenderedSections = actualSections.filter((sec) => {
+    const html = (sec.htmlContent || "").replace(/\s+/g, ' ').trim();
+    if (!html) return false;
+    return !renderedSet.has(html);
+  });
+
+  if (unrenderedSections.length === 0) return null;
 
   return (
     <>
-      {actualSections.map((sec, i) => (
+      {unrenderedSections.map((sec, i) => (
         <div key={i} className="page-custom-section w-full" dangerouslySetInnerHTML={{ __html: sec.htmlContent || "" }} />
       ))}
     </>
