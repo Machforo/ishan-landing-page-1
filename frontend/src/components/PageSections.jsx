@@ -8,7 +8,7 @@ export default function PageSections({ sections: propSections }) {
   useEffect(() => {
     const fetchGlobalSections = async () => {
       try {
-        const apiBase = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || "https://ishan-backend-g096.onrender.com/api";
+        const apiBase = (typeof process !== "undefined" && process?.env?.REACT_APP_API_URL) || "https://ishan-backend-g096.onrender.com/api";
         const cleanPath = location.pathname.replace(/\/+$/, '') || '/';
         let res = await fetch(`${apiBase}/landing2/page-sections/by-url?url=${encodeURIComponent(location.pathname)}`);
         if (!res.ok && cleanPath !== location.pathname) {
