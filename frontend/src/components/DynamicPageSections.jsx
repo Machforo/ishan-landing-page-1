@@ -9,11 +9,18 @@ export default function DynamicPageSections({
 }) {
   const { data: layoutData, loading } = usePageLayout(pageId);
 
+  const effectiveOrder =
+    defaultOrder && defaultOrder.length > 0
+      ? defaultOrder
+      : defaultSections
+      ? Object.keys(defaultSections)
+      : [];
+
   // If loading or no valid sections returned, render default order
   if (loading || !layoutData || !Array.isArray(layoutData.sections) || layoutData.sections.length === 0) {
     return (
       <>
-        {defaultOrder.map((id) => (
+        {effectiveOrder.map((id) => (
           <React.Fragment key={id}>{defaultSections[id] || null}</React.Fragment>
         ))}
       </>
@@ -47,7 +54,7 @@ export default function DynamicPageSections({
           return <React.Fragment key={sec.id}>{target}</React.Fragment>;
         }
 
-        // Custom template section (custom_html, hero, split, cards, cta, faq)
+        // Custom template section (custom_html, hero, split, cards, cta, faq, gallery)
         if (
           sec.type === "custom_html" ||
           sec.htmlContent ||
@@ -55,7 +62,9 @@ export default function DynamicPageSections({
           sec.type === "split" ||
           sec.type === "cards" ||
           sec.type === "cta" ||
-          sec.type === "faq"
+          sec.type === "faq" ||
+          sec.type === "gallery" ||
+          sec.id === "gallery"
         ) {
           return <CustomSectionRenderer key={sec.id} section={sec} />;
         }
@@ -64,7 +73,7 @@ export default function DynamicPageSections({
       })}
 
       {/* Fail-safe: Render any unmentioned default sections that were not hidden */}
-      {defaultOrder.map((id) => {
+      {effectiveOrder.map((id) => {
         if (!renderedIds.has(id) && defaultSections[id]) {
           return <React.Fragment key={id}>{defaultSections[id]}</React.Fragment>;
         }
